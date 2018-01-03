@@ -6,7 +6,13 @@ import android.os.Bundle;
 import android.util.Log;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Observable;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,13 +43,32 @@ public class MainActivity extends AppCompatActivity {
         Call<List<Beer>> repos = service.beers();
         repos.enqueue(new Callback<List<Beer>>() {
             @Override
-            public void onResponse(Call<List<Beer>> call, Response<List<Beer>> response) {
+            public void onResponse(Call<List<Beer>> call, final Response<List<Beer>> response) {
                 Log.d(TAG, "onResponse: " + response);
+                Observable.timer(1, TimeUnit.SECONDS)
+                        .observeOn(Schedulers.io())
+                        .subscribe(new Consumer<Long>() {
+                            @Override
+                            public void accept(Long aLong) throws Exception {
+                                testSql();
 
-                
+                                Beer beer1 = new Beer();
+                                Beer beer2 = new Beer();
 
-                testSql();
-                db.beerStorage().insertAll(response.body());
+                                beer1.id = 42;
+                                beer2.id = 43;
+
+
+                                Beer[] realBeers = {beer1, beer2};
+
+                                db.beerStorage().insertAll(realBeers);
+
+                                List<Beer> newBeer = db.beerStorage().getAll();
+                            }
+                        });
+
+
+
             }
 
             @Override

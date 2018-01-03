@@ -13,21 +13,22 @@ import java.util.List;
 
 @Dao
 interface BeerStorage {
+
     @Query("SELECT * FROM beer")
     List<Beer> getAll();
 /*
     @Query("SELECT * FROM beer WHERE id")
     List<Beer> loadAllByIds(int[] id);
-    */
-
+*/
     /*
     @Query("SELECT * FROM beer")
     Beer findByName(String first, String last);
     */
 
+
     @Insert
-    void insertAll(List<Beer> beers);
+    void insertAll(Beer... beers);
 
     @Delete
-    void delete(Beer user);
+    void delete(Beer... beers);
 }
