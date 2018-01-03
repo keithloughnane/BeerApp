@@ -1,5 +1,6 @@
 package com.keithloughnane.beer.beerapp;
 
+import android.arch.persistence.room.Room;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,14 +16,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "BeerLog";
+    private AppDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //testSql();
         testApi();
-        testSql();
     }
 
     private void testApi() {
@@ -37,6 +39,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Beer>> call, Response<List<Beer>> response) {
                 Log.d(TAG, "onResponse: " + response);
+
+                
+
+                testSql();
+                db.beerStorage().insertAll(response.body());
             }
 
             @Override
@@ -47,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void testSql() {
-
+        db = Room.databaseBuilder(getApplicationContext(),
+                AppDatabase.class, "beer").build();
     }
 }
