@@ -8,6 +8,8 @@ import android.util.Log;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -24,9 +26,16 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "BeerLog";
     private AppDatabase db;
 
+    @Inject
+    Beer beer;
+
+    private AppComponent component;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        component = DaggerAppComponent.builder().build();
+        component.inject(this);
         setContentView(R.layout.activity_main);
 
         //testSql();
@@ -34,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void testApi() {
+        Beer beer99 = beer;
+
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.punkapi.com/v2/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -45,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Beer>> call, final Response<List<Beer>> response) {
                 Log.d(TAG, "onResponse: " + response);
-                Observable.timer(1, TimeUnit.SECONDS)
+                Observable.timer(10, TimeUnit.SECONDS)
                         .observeOn(Schedulers.io())
                         .subscribe(new Consumer<Long>() {
                             @Override
