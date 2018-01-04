@@ -4,6 +4,7 @@ import android.arch.persistence.room.Room;
 import android.content.Context;
 
 import com.keithloughnane.beer.beerapp.data.Beer;
+import com.keithloughnane.beer.beerapp.dataAccess.DataAccess;
 import com.keithloughnane.beer.beerapp.dataAccess.local.AppDatabase;
 import com.keithloughnane.beer.beerapp.dataAccess.remote.BeerService;
 
@@ -19,11 +20,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 @Module
-class AppModule {
+public class AppModule {
+    Context context;
+
+    public AppModule(Context context) {
+        this.context = context;
+    }
 
     @Provides
     @Singleton
-    BeerService providesBeer() {
+    BeerService remoteData() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.punkapi.com/v2/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -36,8 +42,19 @@ class AppModule {
 
     @Provides
     @Singleton
-    public AppDatabase testSql(Context context) {
+    public AppDatabase localData(Context context) {
         return Room.databaseBuilder(context,
                 AppDatabase.class, "beer").build();
+    }
+
+    @Provides
+    @Singleton
+    public DataAccess dataAccess(BeerService localAccess, AppDatabase remoteAccess) {
+        return new DataAccess(localAccess, remoteAccess);
+    }
+
+    @Provides
+    public Context context() {
+        return context;
     }
 }

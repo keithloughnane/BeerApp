@@ -7,8 +7,14 @@ import android.app.Application;
  */
 
 public class BeerApplication extends Application {
+    public AppComponent component;
+
     @Override
     public void onCreate() {
         super.onCreate();
+
+        component = DaggerAppComponent.builder()
+                .appModule(new AppModule(this))
+                .build();
     }
 }
