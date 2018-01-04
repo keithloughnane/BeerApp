@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
     private void testApi() {
         Beer beer99 = beer;
 
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.punkapi.com/v2/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -64,11 +63,8 @@ public class MainActivity extends AppCompatActivity {
                             public void accept(Long aLong) throws Exception {
                                 testSql();
 
-                                Beer beer1 = new Beer();
-                                Beer beer2 = new Beer();
-
-                                beer1.id = 42;
-                                beer2.id = 43;
+                                Beer beer1 = response.body().get(0);
+                                Beer beer2 = response.body().get(1);
 
 
                                 Beer[] realBeers = {beer1, beer2};
