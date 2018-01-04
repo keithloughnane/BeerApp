@@ -1,5 +1,7 @@
 package com.keithloughnane.beer.beerapp;
 
+import com.keithloughnane.beer.beerapp.data.Beer;
+
 import dagger.Module;
 import dagger.Provides;
 

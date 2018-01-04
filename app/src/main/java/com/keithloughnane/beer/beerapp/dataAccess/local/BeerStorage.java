@@ -1,4 +1,4 @@
-package com.keithloughnane.beer.beerapp;
+package com.keithloughnane.beer.beerapp.dataAccess.local;
 
 /**
  * Created by user on 03/01/2018.
@@ -9,10 +9,12 @@ import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
+import com.keithloughnane.beer.beerapp.data.Beer;
+
 import java.util.List;
 
 @Dao
-interface BeerStorage {
+public interface BeerStorage {
 
     @Query("SELECT * FROM beer")
     List<Beer> getAll();

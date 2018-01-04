@@ -1,5 +1,7 @@
 package com.keithloughnane.beer.beerapp;
 
+import com.keithloughnane.beer.beerapp.activities.MainActivity;
+
 import javax.inject.Singleton;
 
 import dagger.Component;

@@ -7,5 +7,8 @@ import android.app.Application;
  */
 
 public class BeerApplication extends Application {
-
+    @Override
+    public void onCreate() {
+        super.onCreate();
+    }
 }

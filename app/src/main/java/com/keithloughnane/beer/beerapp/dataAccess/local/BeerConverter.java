@@ -1,9 +1,10 @@
-package com.keithloughnane.beer.beerapp;
+package com.keithloughnane.beer.beerapp.dataAccess.local;
 
 import android.arch.persistence.room.TypeConverter;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.keithloughnane.beer.beerapp.data.Ingredient;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
