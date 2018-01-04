@@ -3,7 +3,6 @@ package com.keithloughnane.beer.beerapp;
 import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
-import android.arch.persistence.room.Relation;
 import android.arch.persistence.room.TypeConverters;
 
 import java.util.ArrayList;
@@ -32,13 +31,13 @@ class Beer {
     float ph;
     float attenuation_level;
     @Embedded(prefix="volume")
-    Volume volume;
+    UnitVolume volume;
     @Embedded(prefix="boil")
-    Volume boil_volume;
+    UnitVolume boil_volume;
     @Embedded(prefix="method")
     Method method;
     @Embedded(prefix="ingredients")
-    Method ingredients;
+    Ingredients ingredients;
 
     ArrayList<String> food_pairing;
     String brewers_tips;

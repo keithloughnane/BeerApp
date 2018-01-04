@@ -8,7 +8,7 @@ import android.arch.persistence.room.PrimaryKey;
  * Created by user on 04/01/2018.
  */
 
-class Volume {
+class UnitVolume {
     float value;
     String unit; //TODO KL: Change to ENUM
 }

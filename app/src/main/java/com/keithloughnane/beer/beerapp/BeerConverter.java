@@ -25,4 +25,19 @@ public class BeerConverter {
         String json = gson.toJson(list);
         return json;
     }
+
+    @TypeConverter
+    public static ArrayList<Ingredient> fromIngredientString(String value) {
+        Type listType = new TypeToken<ArrayList<Ingredient>>() {}.getType();
+        return new Gson().fromJson(value, listType);
+    }
+
+    @TypeConverter
+    public static String fromIngredientList(ArrayList<Ingredient> list) {
+        Gson gson = new Gson();
+        String json = gson.toJson(list);
+        return json;
+    }
+
+
 }
