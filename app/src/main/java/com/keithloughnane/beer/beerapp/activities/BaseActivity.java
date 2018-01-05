@@ -1,6 +1,8 @@
 package com.keithloughnane.beer.beerapp.activities;
 
 import android.graphics.ColorSpace;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.keithloughnane.beer.beerapp.AppComponent;
@@ -17,7 +19,14 @@ public abstract class BaseActivity<M extends BeerModel, C extends Controller> ex
     BaseActivity() {
         model = createModel();
         controller = createController();
-        injectController(((BeerApplication) getApplication()).component);
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        AppComponent component = ((BeerApplication) getApplication()).component;
+        injectController(component);
         controller.SetUp();
     }
 

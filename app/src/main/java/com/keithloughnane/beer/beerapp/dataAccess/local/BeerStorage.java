@@ -7,6 +7,7 @@ package com.keithloughnane.beer.beerapp.dataAccess.local;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
 import com.keithloughnane.beer.beerapp.data.Beer;
@@ -27,8 +28,7 @@ public interface BeerStorage {
     Beer findByName(String first, String last);
     */
 
-
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(Beer... beers);
 
     @Delete

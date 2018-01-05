@@ -6,10 +6,13 @@ import com.keithloughnane.beer.beerapp.data.Beer;
 import com.keithloughnane.beer.beerapp.dataAccess.local.AppDatabase;
 import com.keithloughnane.beer.beerapp.dataAccess.remote.BeerService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
@@ -31,7 +34,30 @@ public class DataAccess {
         this.localService = localService;
     }
 
-    public Observable getBeer() {
+    public Observable<ArrayList<Beer>> getBeer() {
+        /*remoteService.beers().subscribe(new Observer<List<Beer>>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(List<Beer> beers) {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });*/
+
+
         return remoteService.beers();
     }
 

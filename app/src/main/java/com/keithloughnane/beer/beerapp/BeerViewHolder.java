@@ -1,6 +1,8 @@
 package com.keithloughnane.beer.beerapp;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.view.CollapsibleActionView;
 import android.view.View;
 
 import com.keithloughnane.beer.beerapp.activities.BeerModel;
@@ -15,7 +17,8 @@ public class BeerViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(BeerModel model) {
-
-
+        itemView.setMinimumHeight(100);
+        itemView.setMinimumWidth(100);
+        itemView.setBackgroundColor(Color.RED);
     }
 }
