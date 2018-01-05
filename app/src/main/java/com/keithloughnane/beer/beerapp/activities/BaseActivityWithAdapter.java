@@ -2,7 +2,9 @@ package com.keithloughnane.beer.beerapp.activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -43,15 +45,14 @@ abstract class BaseActivityWithAdapter<B, M> extends BaseActivity implements Bee
         super.onCreate(savedInstanceState);
 
         ButterKnife.bind(this);
-
+        adapter = new Adapter();
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
-
 
     @Override
     public void downloadComplete() {
-        //adapter.notifyDataSetChanged();
-        adapter = new Adapter();
         recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -62,12 +63,12 @@ abstract class BaseActivityWithAdapter<B, M> extends BaseActivity implements Bee
     class Adapter extends RecyclerView.Adapter<BeerViewHolder> {
         @Override
         public BeerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new BeerViewHolder(new View(getBaseContext()));
+            return new BeerViewHolder(LayoutInflater.from(getBaseContext()).inflate(R.layout.beer_view_holder ,null));
         }
 
         @Override
         public void onBindViewHolder(BeerViewHolder holder, int position) {
-            holder.bind(model);
+            holder.bind(model.beers.get(position));
         }
 
         @Override
