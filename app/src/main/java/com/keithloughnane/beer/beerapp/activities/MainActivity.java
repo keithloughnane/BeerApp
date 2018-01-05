@@ -10,6 +10,7 @@ public class MainActivity extends BaseActivityWithAdapter<BeerModel, MainActivit
     //private AppComponent component;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
