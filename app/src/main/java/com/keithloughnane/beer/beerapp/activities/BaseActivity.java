@@ -17,15 +17,18 @@ public abstract class BaseActivity<M extends BeerModel, C extends Controller> ex
     C controller;
 
     BaseActivity() {
-        model = createModel();
-        controller = createController();
+
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         AppComponent component = ((BeerApplication) getApplication()).component;
+
+        model = createModel();
+
+        controller = createController();
+
         injectController(component);
         controller.SetUp();
     }

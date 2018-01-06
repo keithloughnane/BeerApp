@@ -1,5 +1,6 @@
 package com.keithloughnane.beer.beerapp.dataAccess;
 
+import android.util.Log;
 import android.util.Pair;
 
 import com.keithloughnane.beer.beerapp.data.Beer;
@@ -34,23 +35,14 @@ public class DataAccess { //TODO KL: Better names
         dataService = localService;
 
         this.networkStatus = networkStatus;
-
-/*
-        remoteService.getAllBeers()
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
-                .subscribe(new Consumer<List<Beer>>() {
-                    @Override
-                    public void accept(List<Beer> beers) throws Exception {
-                        d.beerStorage().insertAll(beers);
-                    }
-                });*/
     }
 
     public Observable<List<Beer>> sub(Observable<SelectType> selectMode) {
+        Log.d("KLTest", "sub 000");
         return Observable.combineLatest(networkStatus, selectMode, new BiFunction<Boolean, SelectType, Pair<Boolean, SelectType>>() {
             @Override
             public Pair<Boolean, SelectType> apply(Boolean networkStatus, SelectType selectMode) throws Exception {
+                Log.d("KLTest", "sub 100");
                 return new Pair<>(networkStatus, selectMode);
             }
         })
@@ -59,7 +51,7 @@ public class DataAccess { //TODO KL: Better names
                     @Override
                     public Observable<Pair<Boolean, SelectType>> apply(final Pair<Boolean, SelectType> booleanIntegerPair) throws Exception {
                         if (booleanIntegerPair.first && !refreshed) {
-
+                            Log.d("KLTest", "sub 200");
                             return remoteService.getAllBeers()
                                     .observeOn(Schedulers.io())
                                     .subscribeOn(Schedulers.io())
@@ -68,12 +60,14 @@ public class DataAccess { //TODO KL: Better names
                                         public Observable<Pair<Boolean, SelectType>> apply(List<Beer> beers) throws Exception {
                                             ((AppDatabaseWrapper) localService).insert(beers);
                                             refreshed = true;
+                                            Log.d("KLTest", "sub 300");
                                             return Observable.just(booleanIntegerPair); //TODO KL: Changed to doOnNext and just
                                         }
                                     })
                                     .onErrorResumeNext(new Function<Throwable, ObservableSource<Pair<Boolean, SelectType>>>() {
                                         @Override
                                         public ObservableSource<Pair<Boolean, SelectType>> apply(Throwable throwable) throws Exception {
+                                            Log.d("KLTest", "sub E400");
                                             return Observable.just(booleanIntegerPair); //TODO KL: Changed to doOnNext and just
                                         }
                                     });
@@ -87,6 +81,7 @@ public class DataAccess { //TODO KL: Better names
                 .flatMap(new Function<Pair<Boolean, SelectType>, Observable<List<Beer>>>() {
                     @Override
                     public Observable<List<Beer>> apply(Pair<Boolean, SelectType> booleanIntegerPair) throws Exception {
+                        Log.d("KLTest", "sub 500");
                         switch (booleanIntegerPair.second) {
                             case ABV:
                                 return localService.getAbvBeer();

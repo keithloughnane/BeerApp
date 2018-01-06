@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,16 +44,19 @@ abstract class BaseActivityWithAdapter<B, M> extends BaseActivity implements Bee
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
         ButterKnife.bind(this);
         adapter = new Adapter();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+        Log.d("KLTest", "recycle set up");
+        super.onCreate(savedInstanceState);
     }
 
     @Override
     public void downloadComplete() {
-        recyclerView.setAdapter(adapter);
+
+
+
         adapter.notifyDataSetChanged();
     }
 
@@ -74,6 +78,7 @@ abstract class BaseActivityWithAdapter<B, M> extends BaseActivity implements Bee
 
         @Override
         public int getItemCount() {
+            Log.d("KLTest", "count = " + model.beers.size());
             return model.beers.size();
         }
     }

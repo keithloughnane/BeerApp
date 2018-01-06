@@ -33,9 +33,10 @@ public class MainActivity extends BaseActivityWithAdapter<BeerModel, MainActivit
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
+        ((BeerApplication) getApplication()).component.inject(this);
         super.onCreate(savedInstanceState);
 
-        ((BeerApplication) getApplication()).component.inject(this);
+
         //component.inject(this);
 
         RxView.clicks(favourite)
@@ -71,7 +72,6 @@ public class MainActivity extends BaseActivityWithAdapter<BeerModel, MainActivit
 
     @Override
     protected BeerModel createModel() {
-
         BeerModel model = new BeerModel();
         model.view = this;
         return model;

@@ -40,6 +40,7 @@ public class MainActivityController extends ControllerWithAdapter {
     @Override
     protected Disposable setUpSubscriptions() {
         model.view.downloadStarted();
+        Log.e("KLTest", "setUpSubscriptions");
         dataAccess.sub(selectMode)
                 //.subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -47,6 +48,7 @@ public class MainActivityController extends ControllerWithAdapter {
                     @Override
                     public void onSubscribe(Disposable d) {
                         Log.d("KLTest", "onSubscribe : " + d);
+
                     }
 
                     @Override
@@ -67,6 +69,8 @@ public class MainActivityController extends ControllerWithAdapter {
 
                     }
                 });
+
+        Log.e("KLTest", "onNext");
 
         selectMode.onNext(DataAccess.SelectType.ALL);
         networkObserver.sub.onNext(false);
