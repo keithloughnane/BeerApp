@@ -42,7 +42,8 @@ public class MainActivityController extends ControllerWithAdapter {
     protected Disposable setUpSubscriptions() {
         model.view.downloadStarted();
         dataAccess.sub(selectMode)
-                .subscribeOn(AndroidSchedulers.mainThread())
+                //.subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<Beer>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
