@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.keithloughnane.beer.beerapp.BeerViewHolder;
+import com.keithloughnane.beer.beerapp.ControllerWithAdapter;
 import com.keithloughnane.beer.beerapp.R;
 import com.keithloughnane.beer.beerapp.dataAccess.DataAccess;
 
@@ -63,7 +64,7 @@ abstract class BaseActivityWithAdapter<B, M> extends BaseActivity implements Bee
     class Adapter extends RecyclerView.Adapter<BeerViewHolder> {
         @Override
         public BeerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new BeerViewHolder(LayoutInflater.from(getBaseContext()).inflate(R.layout.beer_view_holder ,null));
+            return new BeerViewHolder(LayoutInflater.from(getBaseContext()).inflate(R.layout.beer_view_holder ,null),  (ControllerWithAdapter) controller); //TODO KL: Refactor to avoid cast
         }
 
         @Override

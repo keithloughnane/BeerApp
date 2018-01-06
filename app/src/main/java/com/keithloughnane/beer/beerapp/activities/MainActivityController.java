@@ -1,12 +1,9 @@
 package com.keithloughnane.beer.beerapp.activities;
 
-import android.content.Intent;
 import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
 
 import com.keithloughnane.beer.beerapp.AppComponent;
-import com.keithloughnane.beer.beerapp.R;
+import com.keithloughnane.beer.beerapp.ControllerWithAdapter;
 import com.keithloughnane.beer.beerapp.data.Beer;
 import com.keithloughnane.beer.beerapp.dataAccess.DataAccess;
 
@@ -14,23 +11,18 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
 import io.reactivex.Observer;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.disposables.Disposables;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
-
-import static android.support.v4.content.ContextCompat.startActivity;
 
 /**
  * Created by user on 04/01/2018.
  */
 
-public class MainActivityController extends Controller {
+public class MainActivityController extends ControllerWithAdapter {
     @Inject
     DataAccess dataAccess;
     public PublishSubject<Object> favouriteClick = PublishSubject.create();

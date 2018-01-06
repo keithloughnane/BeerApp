@@ -3,6 +3,7 @@ package com.keithloughnane.beer.beerapp.activities;
 import android.util.Log;
 
 import com.keithloughnane.beer.beerapp.AppComponent;
+import com.keithloughnane.beer.beerapp.ControllerWithAdapter;
 import com.keithloughnane.beer.beerapp.data.Beer;
 import com.keithloughnane.beer.beerapp.dataAccess.DataAccess;
 
@@ -22,7 +23,7 @@ import io.reactivex.schedulers.Schedulers;
  * Created by user on 06/01/2018.
  */
 
-public class FavoriteActivityController extends Controller {
+public class FavoriteActivityController extends ControllerWithAdapter {
 
     @Inject
     DataAccess dataAccess; //TODO KL: Move to super

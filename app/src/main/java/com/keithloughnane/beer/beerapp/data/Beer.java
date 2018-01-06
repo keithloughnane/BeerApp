@@ -7,6 +7,7 @@ import android.arch.persistence.room.TypeConverters;
 
 import com.keithloughnane.beer.beerapp.dataAccess.local.BeerConverter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -16,9 +17,10 @@ import java.util.ArrayList;
 @Entity
 
 @TypeConverters({BeerConverter.class})
-public class Beer {
+public class Beer implements Serializable {
     @PrimaryKey
     public int id;
+    public boolean favorite = false;
     public String name;
     public String tagline;
     public String first_brewed; //TODO KL. Right type?
