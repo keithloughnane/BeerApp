@@ -3,6 +3,7 @@ package com.keithloughnane.beer.beerapp.activities;
 
 import com.keithloughnane.beer.beerapp.AppComponent;
 
+import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 /**
