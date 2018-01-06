@@ -8,12 +8,23 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.keithloughnane.beer.beerapp.AppComponent;
 import com.keithloughnane.beer.beerapp.BeerApplication;
 import com.keithloughnane.beer.beerapp.R;
+import com.keithloughnane.beer.beerapp.dataAccess.DataAccess;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import io.reactivex.functions.Consumer;
 
 public class MainActivity extends BaseActivityWithAdapter<BeerModel, MainActivityController> {
     //private AppComponent component;
+
+    @BindView(R.id.abv)
+    Button abv;
+
+    @BindView(R.id.ibu)
+    Button ibu;
+
+    @BindView(R.id.ebc)
+    Button ebc;
 
     @BindView(R.id.fav)
     Button favourite;
@@ -41,6 +52,21 @@ public class MainActivity extends BaseActivityWithAdapter<BeerModel, MainActivit
                         ((MainActivityController) controller).favouriteClick.onNext(o); //TODO KL: Need whole object?
                     }
                 });
+    }
+
+    @OnClick(R.id.abv)
+    public void abvClick() {
+        ((MainActivityController) controller).selectMode.onNext(DataAccess.SelectType.ABV);
+    }
+
+    @OnClick(R.id.ibu)
+    public void ibuClick() {
+        ((MainActivityController) controller).selectMode.onNext(DataAccess.SelectType.IBU);
+    }
+
+    @OnClick(R.id.ebc)
+    public void ebcClick() {
+        ((MainActivityController) controller).selectMode.onNext(DataAccess.SelectType.EBC);
     }
 
     @Override

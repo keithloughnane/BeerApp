@@ -24,16 +24,16 @@ public interface BeerStorage {
     @Query("SELECT * FROM beer")
     List<Beer> getAllBeers();
 
-    @Query("SELECT * FROM beer")
+    @Query("SELECT * FROM beer WHERE favorite = 1")
     List<Beer> getFavBeer();
 
-    @Query("SELECT * FROM beer")
+    @Query("SELECT * FROM beer ORDER BY abv")
     List<Beer> getAbvBeer();
 
-    @Query("SELECT * FROM beer")
+    @Query("SELECT * FROM beer ORDER BY ebc")
     List<Beer> getEbcBeer();
 
-    @Query("SELECT * FROM beer")
+    @Query("SELECT * FROM beer ORDER BY ibu")
     List<Beer> getIbuBeer();
 
     /*

@@ -47,33 +47,33 @@ public class DataAccess { //TODO KL: Better names
                 });*/
     }
 
-    public Observable<List<Beer>> sub(Observable<Integer> selectMode) {
-        return Observable.combineLatest(networkStatus, selectMode, new BiFunction<Boolean, Integer, Pair<Boolean, Integer>>() {
+    public Observable<List<Beer>> sub(Observable<SelectType> selectMode) {
+        return Observable.combineLatest(networkStatus, selectMode, new BiFunction<Boolean, SelectType, Pair<Boolean, SelectType>>() {
             @Override
-            public Pair<Boolean, Integer> apply(Boolean networkStatus, Integer selectMode) throws Exception {
+            public Pair<Boolean, SelectType> apply(Boolean networkStatus, SelectType selectMode) throws Exception {
                 return new Pair<>(networkStatus, selectMode);
             }
         })
-                .flatMap(new Function<Pair<Boolean, Integer>, Observable<Pair<Boolean, Integer>>>() {
+                .flatMap(new Function<Pair<Boolean, SelectType>, Observable<Pair<Boolean, SelectType>>>() {
 
                     @Override
-                    public Observable<Pair<Boolean, Integer>> apply(final Pair<Boolean, Integer> booleanIntegerPair) throws Exception {
+                    public Observable<Pair<Boolean, SelectType>> apply(final Pair<Boolean, SelectType> booleanIntegerPair) throws Exception {
                         if (booleanIntegerPair.first && !refreshed) {
 
                             return remoteService.getAllBeers()
                                     .observeOn(Schedulers.io())
                                     .subscribeOn(Schedulers.io())
-                                    .flatMap(new Function<List<Beer>, Observable<Pair<Boolean, Integer>>>() {
+                                    .flatMap(new Function<List<Beer>, Observable<Pair<Boolean, SelectType>>>() {
                                         @Override
-                                        public Observable<Pair<Boolean, Integer>> apply(List<Beer> beers) throws Exception {
+                                        public Observable<Pair<Boolean, SelectType>> apply(List<Beer> beers) throws Exception {
                                             ((AppDatabaseWrapper) localService).insert(beers);
                                             refreshed = true;
                                             return Observable.just(booleanIntegerPair); //TODO KL: Changed to doOnNext and just
                                         }
                                     })
-                                    .onErrorResumeNext(new Function<Throwable, ObservableSource<Pair<Boolean, Integer>>>() {
+                                    .onErrorResumeNext(new Function<Throwable, ObservableSource<Pair<Boolean, SelectType>>>() {
                                         @Override
-                                        public ObservableSource<Pair<Boolean, Integer>> apply(Throwable throwable) throws Exception {
+                                        public ObservableSource<Pair<Boolean, SelectType>> apply(Throwable throwable) throws Exception {
                                             return Observable.just(booleanIntegerPair); //TODO KL: Changed to doOnNext and just
                                         }
                                     });
@@ -84,33 +84,27 @@ public class DataAccess { //TODO KL: Better names
                 })
                 .observeOn(Schedulers.io())
                 .subscribeOn(Schedulers.io())
-                .flatMap(new Function<Pair<Boolean, Integer>, Observable<List<Beer>>>() {
+                .flatMap(new Function<Pair<Boolean, SelectType>, Observable<List<Beer>>>() {
                     @Override
-                    public Observable<List<Beer>> apply(Pair<Boolean, Integer> booleanIntegerPair) throws Exception {
-                        return localService.getAllBeers();
+                    public Observable<List<Beer>> apply(Pair<Boolean, SelectType> booleanIntegerPair) throws Exception {
+                        switch (booleanIntegerPair.second) {
+                            case ABV:
+                                return localService.getAbvBeer();
+                            case IBU:
+                                return localService.getIbuBeer();
+                            case EBC:
+                                return localService.getEbcBeer();
+                            case FAV:
+                                return localService.getFavBeer();
+                            case ALL:
+                            default:
+                                return localService.getAllBeers();
+                        }
                     }
                 });
     }
 
-    /*
-    public Observable<List<Beer>> getAllBeer() {
-        return dataService.getAllBeers();
+    public enum SelectType {
+        ABV, IBU, EBC, FAV, ALL;
     }
-
-    public Observable<List<Beer>> getFavBeer() {
-        return dataService.getFavBeer();
-    }
-
-    public Observable<List<Beer>> getAbvBeer() {
-        return dataService.getAbvBeer();
-    }
-
-    public Observable<List<Beer>> getEbcBeer() {
-        return dataService.getEbcBeer();
-    }
-
-    public Observable<List<Beer>> getIbuBeer() {
-        return dataService.getIbuBeer();
-    }
-    */
 }

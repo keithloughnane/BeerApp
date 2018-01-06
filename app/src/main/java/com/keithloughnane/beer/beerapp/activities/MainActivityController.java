@@ -8,7 +8,6 @@ import com.keithloughnane.beer.beerapp.NetworkObserver;
 import com.keithloughnane.beer.beerapp.data.Beer;
 import com.keithloughnane.beer.beerapp.dataAccess.DataAccess;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -17,7 +16,6 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.disposables.Disposables;
-import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
 
 
@@ -33,7 +31,7 @@ public class MainActivityController extends ControllerWithAdapter {
     NetworkObserver networkObserver;
 
     public PublishSubject<Object> favouriteClick = PublishSubject.create();
-    PublishSubject<Integer> selectMode = PublishSubject.create();
+    PublishSubject<DataAccess.SelectType> selectMode = PublishSubject.create();
 
     MainActivityController(BeerModel beerMode) {
         super(beerMode);
@@ -54,6 +52,7 @@ public class MainActivityController extends ControllerWithAdapter {
                     @Override
                     public void onNext(List<Beer> beers) { //TODO KL: Should I be using this
                         Log.d("KLTest", ":" + beers);
+                        model.beers.clear();
                         model.beers.addAll(beers);
                         model.view.downloadComplete();
                     }
@@ -69,7 +68,7 @@ public class MainActivityController extends ControllerWithAdapter {
                     }
                 });
 
-        selectMode.onNext(1);
+        selectMode.onNext(DataAccess.SelectType.ALL);
         networkObserver.sub.onNext(false);
 
 
