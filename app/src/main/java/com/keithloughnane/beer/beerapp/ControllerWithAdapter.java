@@ -14,6 +14,7 @@ import io.reactivex.subjects.PublishSubject;
 
 public abstract class ControllerWithAdapter extends Controller {
     public PublishSubject<Beer> holderClick = PublishSubject.create();
+    public PublishSubject<Object> favoriteClick = PublishSubject.create();
 
     public ControllerWithAdapter(BeerModel beerModel) {
         super(beerModel);
@@ -24,6 +25,13 @@ public abstract class ControllerWithAdapter extends Controller {
             @Override
             public void accept(Beer beer) throws Exception {
 
+            }
+        });
+
+        favoriteClick.subscribe(new Consumer<Object>() {
+            @Override
+            public void accept(Object o) throws Exception {
+                 //TODO KL: Update here
             }
         });
     } //TODO KL: Rename

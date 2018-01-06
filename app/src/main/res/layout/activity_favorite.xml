@@ -3,10 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
     <RelativeLayout
         android:layout_width="match_parent"
+        android:background="@drawable/white_background"
         android:layout_height="100dp">
 
         <ImageView
@@ -14,22 +16,48 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignParentStart="true"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/favourite_checked"
+            android:scaleType="centerInside"
             android:paddingEnd="5dp"
-            android:paddingStart="5dp" />
+            android:paddingStart="5dp"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:textAlignment="textEnd"
-            android:paddingEnd="10dp"
+            android:layout_alignParentTop="true"
             android:layout_toEndOf="@id/logo"
-            android:text="Favorites"
-            android:textSize="40sp" />
+            android:paddingEnd="20dp"
+            android:textStyle="bold"
+            android:text="@string/favorites"
+            android:textAlignment="textEnd"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            tools:ignore="RtlSymmetry" />
+
+        <TextView
+            android:id="@+id/subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/title"
+            android:layout_toEndOf="@id/logo"
+            android:paddingEnd="10dp"
+            android:text="@string/favorites_subtitle"
+            android:textAlignment="textEnd"
+            android:textColor="@color/black"
+
+            android:textSize="12dp"
+            tools:ignore="RtlSymmetry,SpUsage" />
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/black"/>
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/content_view"

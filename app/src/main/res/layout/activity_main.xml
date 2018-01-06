@@ -3,83 +3,100 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="100dp"
+        android:background="@drawable/white_background">
 
         <ImageView
             android:id="@+id/logo"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignParentStart="true"
-            android:background="@color/colorPrimary"
-            android:paddingEnd="5dp"
+            android:background="@drawable/logo"
+            android:scaleType="fitCenter"
+            android:paddingEnd="20dp"
             android:paddingStart="5dp" />
 
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:textAlignment="textEnd"
-            android:paddingEnd="10dp"
+            android:layout_alignParentTop="true"
             android:layout_toEndOf="@id/logo"
-            android:text="Brewdog"
-            android:textSize="40sp" />
+            android:paddingEnd="20dp"
+            android:text="@string/app_title"
+            android:textAlignment="textEnd"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            tools:ignore="RtlSymmetry" />
 
         <TextView
             android:id="@+id/subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/title"
-            android:paddingEnd="10dp"
             android:layout_alignParentEnd="true"
+            android:layout_below="@id/title"
+            android:layout_toEndOf="@id/logo"
+            android:paddingEnd="10dp"
+            android:text="@string/app_subtitle"
             android:textAlignment="textEnd"
-            android:text="Beer App"
+            android:textColor="@color/black"
 
-            android:layout_toEndOf="@id/logo" />
+            android:textSize="12dp"
+            tools:ignore="RtlSymmetry,SpUsage" />
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/black"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/abv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/text_white"
+   android:background="@android:color/transparent"
             android:layout_weight="1"
-            android:text="ABV"
-            android:padding="5dp" />
+            android:padding="10dp"
+            android:text="@string/abv" />
 
         <Button
             android:id="@+id/ibu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/text_white"
+            android:background="@android:color/transparent"
             android:layout_weight="1"
-            android:text="IBU"
-            android:padding="5dp" />
+
+            android:text="@string/ibu" />
 
         <Button
             android:id="@+id/ebc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/text_white"
+            android:background="@android:color/transparent"
             android:layout_weight="1"
-            android:text="EBC"
-            android:padding="5dp" />
+
+            android:text="@string/ebc" />
 
         <Button
             android:id="@+id/fav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/text_white"
+            android:background="@android:color/transparent"
             android:layout_weight="1"
-            android:text="Fav"
-            android:padding="5dp" />
+
+            android:text="@string/fav" />
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView

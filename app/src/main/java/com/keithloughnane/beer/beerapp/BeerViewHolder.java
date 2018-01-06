@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.CollapsibleActionView;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,9 +21,11 @@ import org.w3c.dom.Text;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 
+import static android.support.v4.content.ContextCompat.getDrawable;
 import static android.support.v4.content.ContextCompat.startActivity;
 
 /**
@@ -56,6 +59,9 @@ public class BeerViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.ph)
     TextView ph;
 
+    @BindView(R.id.favorite)
+    ImageButton favorite;
+
     public BeerViewHolder(View itemView, ControllerWithAdapter controller) {
         super(itemView);
         this.controller = controller;
@@ -77,6 +83,18 @@ public class BeerViewHolder extends RecyclerView.ViewHolder {
                 .fit()
                 .centerInside()
                 .into(beerImage);
+
+        RxView.clicks(favorite)
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext(new Consumer<Object>() {
+
+                    @Override
+                    public void accept(Object o) throws Exception {
+                        beer.favorite = !beer.favorite;
+                        favorite.setBackground(getDrawable(itemView.getContext(), beer.favorite ? R.drawable.favourite_checked : R.drawable.favourite_unchecked));
+                    }
+                })
+                .subscribe(controller.favoriteClick);
 
         RxView.clicks(itemView)
                 .map(new Function<Object, Beer>() {
