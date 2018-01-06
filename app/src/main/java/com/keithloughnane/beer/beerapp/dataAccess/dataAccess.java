@@ -23,43 +23,40 @@ import retrofit2.Response;
  * Created by user on 04/01/2018.
  */
 
-public class DataAccess {
+public class DataAccess  { //TODO KL: Better names
 
     private static final String TAG = "BeerLog";
-    private final BeerService remoteService;
-    private AppDatabase localService;
+    private DataService remoteService;
+    private DataService localService;
+    private DataService dataService;
 
-    public DataAccess(BeerService remoteService, AppDatabase localService) {
+    public DataAccess(BeerServiceWrapper remoteService, AppDatabaseWrapper localService) {
         this.remoteService = remoteService;
         this.localService = localService;
+
+        dataService =remoteService;
     }
 
-    public Observable<ArrayList<Beer>> getBeer() {
-        /*remoteService.beers().subscribe(new Observer<List<Beer>>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(List<Beer> beers) {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        });*/
-
-
-        return remoteService.beers();
+    public Observable<List<Beer>> getAllBeer() {
+        return dataService.getAllBeers();
     }
+
+    public Observable<List<Beer>> getFavBeer() {
+        return dataService.getFavBeer();
+    }
+
+    public Observable<List<Beer>> getAbvBeer() {
+        return dataService.getAbvBeer();
+    }
+
+    public Observable<List<Beer>> getEbcBeer() {
+        return dataService.getEbcBeer();
+    }
+
+    public Observable<List<Beer>> getIbuBeer() {
+        return dataService.getIbuBeer();
+    }
+
 
     /*
     private void testApi() {

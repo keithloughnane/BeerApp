@@ -11,6 +11,7 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
 import com.keithloughnane.beer.beerapp.data.Beer;
+import com.keithloughnane.beer.beerapp.dataAccess.DataService;
 
 import java.util.List;
 
@@ -19,7 +20,23 @@ public interface BeerStorage {
 
     @Query("SELECT * FROM beer")
     List<Beer> getAll();
-/*
+
+    @Query("SELECT * FROM beer")
+    List<Beer> getAllBeers();
+
+    @Query("SELECT * FROM beer")
+    List<Beer> getFavBeer();
+
+    @Query("SELECT * FROM beer")
+    List<Beer> getAbvBeer();
+
+    @Query("SELECT * FROM beer")
+    List<Beer> getEbcBeer();
+
+    @Query("SELECT * FROM beer")
+    List<Beer> getIbuBeer();
+
+    /*
     @Query("SELECT * FROM beer WHERE id")
     List<Beer> loadAllByIds(int[] id);
 */

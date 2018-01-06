@@ -7,9 +7,8 @@ import com.keithloughnane.beer.beerapp.ControllerWithAdapter;
 import com.keithloughnane.beer.beerapp.data.Beer;
 import com.keithloughnane.beer.beerapp.dataAccess.DataAccess;
 
-import org.reactivestreams.Subscription;
-
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -35,19 +34,19 @@ public class FavoriteActivityController extends ControllerWithAdapter {
     @Override
     protected Disposable setUpSubscriptions() {
         model.view.downloadStarted();
-        dataAccess.getBeer()
+        dataAccess.getAllBeer()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ArrayList<Beer>>() {
+                .subscribe(new Observer<List<Beer>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                         Log.d("KLTest", "onSubscribe : " + d);
                     }
 
                     @Override
-                    public void onNext(ArrayList<Beer> beers) { //TODO KL: Should I be using this
+                    public void onNext(List<Beer> beers) { //TODO KL: Should I be using this
                         Log.d("KLTest", ":" + beers);
-                        model.beers = beers;
+                        model.beers.addAll(beers);
                         model.view.downloadComplete();
                     }
 
