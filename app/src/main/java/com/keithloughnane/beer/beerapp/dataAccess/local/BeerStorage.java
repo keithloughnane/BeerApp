@@ -46,7 +46,7 @@ public interface BeerStorage {
     */
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(Beer... beers);
+    void insertAll(List<Beer> beers);
 
     @Delete
     void delete(Beer... beers);

@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.keithloughnane.beer.beerapp.AppComponent;
 import com.keithloughnane.beer.beerapp.ControllerWithAdapter;
+import com.keithloughnane.beer.beerapp.NetworkObserver;
 import com.keithloughnane.beer.beerapp.data.Beer;
 import com.keithloughnane.beer.beerapp.dataAccess.DataAccess;
 
@@ -26,7 +27,12 @@ import io.reactivex.subjects.PublishSubject;
 public class MainActivityController extends ControllerWithAdapter {
     @Inject
     DataAccess dataAccess;
+
+    @Inject
+    NetworkObserver networkObserver;
+
     public PublishSubject<Object> favouriteClick = PublishSubject.create();
+    PublishSubject<Integer> selectMode = PublishSubject.create();
 
     MainActivityController(BeerModel beerMode) {
         super(beerMode);
@@ -35,9 +41,8 @@ public class MainActivityController extends ControllerWithAdapter {
     @Override
     protected Disposable setUpSubscriptions() {
         model.view.downloadStarted();
-        dataAccess.getAllBeer()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+        dataAccess.sub(selectMode)
+                .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<Beer>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -62,29 +67,9 @@ public class MainActivityController extends ControllerWithAdapter {
                     }
                 });
 
-                     /*
-                     @Override
-                     public void onSubscribe(Disposable d) {
-                         Log.d("KLTest", "onSubscribe : " + d);
-                     }
+        selectMode.onNext(1);
+        networkObserver.sub.onNext(true);
 
-                     @Override
-                     public void onNext(ArrayList<Beer> beers) {
-                         Log.d("KLTest", ":" + beers);
-                         model.beers = beers;
-                         model.view.downloadComplete();
-                     }
-
-                     @Override
-                     public void onError(Throwable e) {
-                         Log.e("KLTest", "onError: " + e);
-                     }
-
-                     @Override
-                     public void onComplete() {
-
-                     }
-                 }*/
 
         favouriteClick
                 //.subscribe();

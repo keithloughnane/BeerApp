@@ -3,7 +3,6 @@ package com.keithloughnane.beer.beerapp;
 import android.arch.persistence.room.Room;
 import android.content.Context;
 
-import com.keithloughnane.beer.beerapp.data.Beer;
 import com.keithloughnane.beer.beerapp.dataAccess.AppDatabaseWrapper;
 import com.keithloughnane.beer.beerapp.dataAccess.BeerServiceWrapper;
 import com.keithloughnane.beer.beerapp.dataAccess.DataAccess;
@@ -53,8 +52,14 @@ public class AppModule {
 
     @Provides
     @Singleton
-    public DataAccess dataAccess(BeerService localAccess, AppDatabase remoteAccess) {
-        return new DataAccess(new BeerServiceWrapper(localAccess), new AppDatabaseWrapper(remoteAccess));
+    public DataAccess dataAccess(BeerService localAccess, AppDatabase remoteAccess, NetworkObserver networkObserver) {
+        return new DataAccess(new BeerServiceWrapper(localAccess), new AppDatabaseWrapper(remoteAccess), remoteAccess, networkObserver.sub);
+    }
+
+    @Provides
+    @Singleton
+    public NetworkObserver providesNetworkObserver() {
+        return new NetworkObserver();
     }
 
     @Provides

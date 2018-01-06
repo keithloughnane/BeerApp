@@ -23,7 +23,7 @@ public class BeerServiceWrapper implements DataService {
     @Override
     public Observable<List<Beer>> getAllBeers() {
         return appDatabase.getAllBeers()
-                .map(new Function<ArrayList<Beer>, List<Beer>>() {
+                .map(new Function<ArrayList<Beer>, List<Beer>>() { //TODO KL: Reuse this
                     @Override
                     public List<Beer> apply(ArrayList<Beer> beers) throws Exception {
                         return beers;

@@ -6,6 +6,8 @@ import com.keithloughnane.beer.beerapp.dataAccess.local.AppDatabase;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.Scheduler;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by user on 06/01/2018.
@@ -42,5 +44,9 @@ public class AppDatabaseWrapper implements DataService {
     @Override
     public Observable<List<Beer>> getIbuBeer() {
         return Observable.just(appDatabase.beerStorage().getIbuBeer());
+    }
+
+    public void insert(List<Beer> beers) {
+        appDatabase.beerStorage().insertAll(beers);
     }
 }

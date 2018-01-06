@@ -34,6 +34,8 @@ public class FavoriteActivityController extends ControllerWithAdapter {
     @Override
     protected Disposable setUpSubscriptions() {
         model.view.downloadStarted();
+
+        /*
         dataAccess.getAllBeer()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -60,7 +62,7 @@ public class FavoriteActivityController extends ControllerWithAdapter {
 
                     }
                 });
-
+*/
         return Disposables.empty();
     }
 

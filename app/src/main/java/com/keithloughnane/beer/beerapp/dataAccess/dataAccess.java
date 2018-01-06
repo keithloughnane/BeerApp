@@ -1,42 +1,96 @@
 package com.keithloughnane.beer.beerapp.dataAccess;
 
-import android.util.Log;
+import android.util.Pair;
 
 import com.keithloughnane.beer.beerapp.data.Beer;
 import com.keithloughnane.beer.beerapp.dataAccess.local.AppDatabase;
-import com.keithloughnane.beer.beerapp.dataAccess.remote.BeerService;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.ObservableSource;
+import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by user on 04/01/2018.
  */
 
-public class DataAccess  { //TODO KL: Better names
+public class DataAccess { //TODO KL: Better names
 
     private static final String TAG = "BeerLog";
+    private final Observable<Boolean> networkStatus;
+    boolean refreshed = false;
     private DataService remoteService;
     private DataService localService;
     private DataService dataService;
 
-    public DataAccess(BeerServiceWrapper remoteService, AppDatabaseWrapper localService) {
+    public DataAccess(BeerServiceWrapper remoteService, AppDatabaseWrapper localService, final AppDatabase d, Observable<Boolean> networkStatus) {
         this.remoteService = remoteService;
         this.localService = localService;
 
-        dataService =remoteService;
+        dataService = localService;
+
+        this.networkStatus = networkStatus;
+
+/*
+        remoteService.getAllBeers()
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .subscribe(new Consumer<List<Beer>>() {
+                    @Override
+                    public void accept(List<Beer> beers) throws Exception {
+                        d.beerStorage().insertAll(beers);
+                    }
+                });*/
     }
 
+    public Observable<List<Beer>> sub(Observable<Integer> selectMode) {
+        return Observable.combineLatest(networkStatus, selectMode, new BiFunction<Boolean, Integer, Pair<Boolean, Integer>>() {
+            @Override
+            public Pair<Boolean, Integer> apply(Boolean networkStatus, Integer selectMode) throws Exception {
+                return new Pair<>(networkStatus, selectMode);
+            }
+        })
+                .flatMap(new Function<Pair<Boolean, Integer>, Observable<Pair<Boolean, Integer>>>() {
+
+                    @Override
+                    public Observable<Pair<Boolean, Integer>> apply(final Pair<Boolean, Integer> booleanIntegerPair) throws Exception {
+                        if (booleanIntegerPair.first && !refreshed) {
+
+                            return remoteService.getAllBeers()
+                                    .observeOn(Schedulers.io())
+                                    .subscribeOn(Schedulers.io())
+                                    .flatMap(new Function<List<Beer>, Observable<Pair<Boolean, Integer>>>() {
+                                        @Override
+                                        public Observable<Pair<Boolean, Integer>> apply(List<Beer> beers) throws Exception {
+                                            ((AppDatabaseWrapper) localService).insert(beers);
+                                            refreshed = true;
+                                            return Observable.just(booleanIntegerPair); //TODO KL: Changed to doOnNext and just
+                                        }
+                                    });
+                                    /*.onErrorResumeNext(new Function<Throwable, ObservableSource<Pair<Boolean, Integer>>>() {
+                                        @Override
+                                        public ObservableSource<Pair<Boolean, Integer>> apply(Throwable throwable) throws Exception {
+                                            return booleanIntegerPair;
+                                        }
+                                    };*/
+                        } else {
+                            return Observable.just(booleanIntegerPair);
+                        }
+                    }
+                })
+                .flatMap(new Function<Pair<Boolean, Integer>, Observable<List<Beer>>>() {
+                    @Override
+                    public Observable<List<Beer>> apply(Pair<Boolean, Integer> booleanIntegerPair) throws Exception {
+                        return localService.getAllBeers();
+                    }
+                });
+    }
+
+    /*
     public Observable<List<Beer>> getAllBeer() {
         return dataService.getAllBeers();
     }
@@ -56,37 +110,5 @@ public class DataAccess  { //TODO KL: Better names
     public Observable<List<Beer>> getIbuBeer() {
         return dataService.getIbuBeer();
     }
-
-
-    /*
-    private void testApi() {
-        Observable<List<Beer>> repos = remoteService.beers();
-
-        repos.enqueue(new Callback<List<Beer>>() {
-            @Override
-            public void onResponse(Call<List<Beer>> call, final Response<List<Beer>> response) {
-                Log.d(TAG, "onResponse: " + response);
-                Observable.timer(10, TimeUnit.SECONDS)
-                        .observeOn(Schedulers.io())
-                        .subscribe(new Consumer<Long>() {
-                            @Override
-                            public void accept(Long aLong) throws Exception {
-                                Beer beer1 = response.body().get(0);
-                                Beer beer2 = response.body().get(1);
-
-                                Beer[] realBeers = {beer1, beer2};
-
-                                localService.beerStorage().insertAll(realBeers);
-
-                                List<Beer> newBeer = localService.beerStorage().getAll();
-                            }
-                        });
-            }
-
-            @Override
-            public void onFailure(Call<List<Beer>> call, Throwable t) {
-
-            }
-        });
-    } */
+    */
 }
