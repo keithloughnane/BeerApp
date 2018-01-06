@@ -1,5 +1,6 @@
 package com.keithloughnane.beer.beerapp;
 
+import com.keithloughnane.beer.beerapp.activities.FavoriteActivityController;
 import com.keithloughnane.beer.beerapp.activities.MainActivity;
 import com.keithloughnane.beer.beerapp.activities.MainActivityController;
 
@@ -17,4 +18,5 @@ import dagger.Component;
 public interface AppComponent {
     void inject(MainActivity mainActivity);
     void inject(MainActivityController mainActivityController);
+    void inject(FavoriteActivityController favoriteActivityController);
 }
