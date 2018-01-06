@@ -20,6 +20,7 @@ import io.reactivex.disposables.Disposables;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
 
+
 /**
  * Created by user on 04/01/2018.
  */
@@ -69,7 +70,7 @@ public class MainActivityController extends ControllerWithAdapter {
                 });
 
         selectMode.onNext(1);
-        networkObserver.sub.onNext(true);
+        networkObserver.sub.onNext(false);
 
 
         favouriteClick
@@ -88,7 +89,7 @@ public class MainActivityController extends ControllerWithAdapter {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Log.e("KLTest", "onError: " + e);
                     }
 
                     @Override

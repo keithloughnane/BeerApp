@@ -70,18 +70,20 @@ public class DataAccess { //TODO KL: Better names
                                             refreshed = true;
                                             return Observable.just(booleanIntegerPair); //TODO KL: Changed to doOnNext and just
                                         }
-                                    });
-                                    /*.onErrorResumeNext(new Function<Throwable, ObservableSource<Pair<Boolean, Integer>>>() {
+                                    })
+                                    .onErrorResumeNext(new Function<Throwable, ObservableSource<Pair<Boolean, Integer>>>() {
                                         @Override
                                         public ObservableSource<Pair<Boolean, Integer>> apply(Throwable throwable) throws Exception {
-                                            return booleanIntegerPair;
+                                            return Observable.just(booleanIntegerPair); //TODO KL: Changed to doOnNext and just
                                         }
-                                    };*/
+                                    });
                         } else {
                             return Observable.just(booleanIntegerPair);
                         }
                     }
                 })
+                .observeOn(Schedulers.io())
+                .subscribeOn(Schedulers.io())
                 .flatMap(new Function<Pair<Boolean, Integer>, Observable<List<Beer>>>() {
                     @Override
                     public Observable<List<Beer>> apply(Pair<Boolean, Integer> booleanIntegerPair) throws Exception {
