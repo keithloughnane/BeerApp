@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 
-import com.keithloughnane.beer.beerapp.util.BeerLogger;
-
 import io.reactivex.subjects.BehaviorSubject;
 
 /**
@@ -18,10 +16,8 @@ public class NetworkObserver {
     public BehaviorSubject<Boolean> sub = BehaviorSubject.create().create();
 
     public NetworkObserver(Context context, final BeerLogger logger) {
-        sub.onNext(true);
-
         final IntentFilter netIntentFilter = new IntentFilter();
-        netIntentFilter.addAction(android.net.ConnectivityManager.CONNECTIVITY_ACTION); //"android.net.conn.CONNECTIVITY_CHANGE"
+        netIntentFilter.addAction(android.net.ConnectivityManager.CONNECTIVITY_ACTION);
 
         BroadcastReceiver mIRNetwork = new BroadcastReceiver() {
             @Override
@@ -29,7 +25,7 @@ public class NetworkObserver {
                 boolean connected = !intent.getBooleanExtra(ConnectivityManager
                         .EXTRA_NO_CONNECTIVITY, false);
 
-                logger.d(connected ? "CONNECTED TO INTERNET" : "DISCONNECTED FROM INTERNET"); //TODO KL: Resources file
+                logger.d(connected ? "CONNECTED TO INTERNET" : "DISCONNECTED FROM INTERNET");
                 sub.onNext(connected);
             }
         };

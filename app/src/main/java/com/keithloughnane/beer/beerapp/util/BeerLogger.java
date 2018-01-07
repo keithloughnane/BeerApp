@@ -12,7 +12,6 @@ public class BeerLogger {
     public void d(String message) {
         Log.d(TAG, message);
     }
-
     public void e(String message) {
         Log.d(TAG, message);
     }
