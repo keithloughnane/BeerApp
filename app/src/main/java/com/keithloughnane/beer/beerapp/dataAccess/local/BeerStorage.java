@@ -35,16 +35,8 @@ public interface BeerStorage {
     @Query("SELECT * FROM beer ORDER BY ibu")
     List<Beer> getIbuBeer();
 
-    /*
-    @Query("SELECT * FROM beer WHERE id")
-    List<Beer> loadAllByIds(int[] id);
-*/
-    /*
-    @Query("SELECT * FROM beer")
-    Beer findByName(String first, String last);
-    */
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    //If row exists don't replace but continue inserting the rest
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertAll(List<Beer> beers);
 
     @Delete

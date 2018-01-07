@@ -1,5 +1,6 @@
 package com.keithloughnane.beer.beerapp;
 
+import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.PublishSubject;
 
 /**
@@ -7,9 +8,9 @@ import io.reactivex.subjects.PublishSubject;
  */
 
 public class NetworkObserver {
-    public PublishSubject<Boolean> sub = PublishSubject.create();
+    public BehaviorSubject<Boolean> sub = BehaviorSubject.create().create();
 
     NetworkObserver() {
-
+        sub.onNext(true);
     }
 }

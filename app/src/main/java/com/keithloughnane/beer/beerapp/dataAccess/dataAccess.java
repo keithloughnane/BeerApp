@@ -14,6 +14,8 @@ import io.reactivex.ObservableSource;
 import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subjects.BehaviorSubject;
+import io.reactivex.subjects.PublishSubject;
 
 /**
  * Created by user on 04/01/2018.
@@ -35,15 +37,18 @@ public class DataAccess { //TODO KL: Better names
         this.networkStatus = networkStatus;
     }
 
-    public Observable<List<Beer>> sub(Observable<SelectType> selectMode) {
+    public Observable<List<Beer>> sub(BehaviorSubject<SelectType> selectMode) {
         Log.d("KLTest", "sub 000");
-        return Observable.combineLatest(networkStatus, selectMode, new BiFunction<Boolean, SelectType, Pair<Boolean, SelectType>>() {
+        return Observable
+
+                .combineLatest(networkStatus, selectMode, new BiFunction<Boolean, SelectType, Pair<Boolean, SelectType>>() {
             @Override
             public Pair<Boolean, SelectType> apply(Boolean networkStatus, SelectType selectMode) throws Exception {
                 Log.d("KLTest", "sub 100");
                 return new Pair<>(networkStatus, selectMode);
             }
         })
+                //.startWith(new Pair<Boolean, SelectType>(true, selectMode))
                 .flatMap(new Function<Pair<Boolean, SelectType>, Observable<Pair<Boolean, SelectType>>>() {
 
                     @Override

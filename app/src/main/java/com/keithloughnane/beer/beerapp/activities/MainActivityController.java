@@ -27,11 +27,11 @@ public class MainActivityController extends ControllerWithAdapter {
     @Inject
     DataAccess dataAccess;
 
-    @Inject
-    NetworkObserver networkObserver;
+    //@Inject
+    //NetworkObserver networkObserver;
 
     public PublishSubject<Object> favouriteClick = PublishSubject.create();
-    PublishSubject<DataAccess.SelectType> selectMode = PublishSubject.create();
+    //PublishSubject<DataAccess.SelectType> selectMode = PublishSubject.create();
 
     MainActivityController(BeerModel beerMode) {
         super(beerMode);
@@ -104,6 +104,9 @@ public class MainActivityController extends ControllerWithAdapter {
 
                     }
                 });
+
+        selectMode.onNext(DataAccess.SelectType.ALL);
+        networkObserver.sub.onNext(true);
 
         return Disposables.empty();
     }

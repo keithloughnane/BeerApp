@@ -16,6 +16,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.disposables.Disposables;
 import io.reactivex.functions.Consumer;
+import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.PublishSubject;
 
 /**
@@ -25,13 +26,14 @@ import io.reactivex.subjects.PublishSubject;
 public abstract class ControllerWithAdapter extends Controller {
     public PublishSubject<Beer> holderClick = PublishSubject.create();
     public PublishSubject<Beer> favoriteClick = PublishSubject.create();
-    PublishSubject<DataAccess.SelectType> selectMode = PublishSubject.create();
+    public BehaviorSubject<DataAccess.SelectType> selectMode = BehaviorSubject.create().create();
 
     @Inject
     public
     DataAccess dataAccess; //TODO KL: Move to super
 
     @Inject
+    protected
     NetworkObserver networkObserver;
 
     public ControllerWithAdapter(BeerModel beerModel) {
@@ -84,9 +86,6 @@ public abstract class ControllerWithAdapter extends Controller {
 
                     }
                 });
-
-        selectMode.onNext(DataAccess.SelectType.ALL);
-        networkObserver.sub.onNext(true);
 
         return Disposables.empty();
     }

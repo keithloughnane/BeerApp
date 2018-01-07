@@ -69,7 +69,8 @@ public class FavoriteActivityController extends ControllerWithAdapter {
                 });
 */
 
-
+        selectMode.onNext(DataAccess.SelectType.FAV);
+        networkObserver.sub.onNext(true);
 
         return Disposables.empty();
     }
