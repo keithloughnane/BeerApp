@@ -1,10 +1,10 @@
 package com.keithloughnane.beer.beerapp.controllers;
 
+import com.keithloughnane.beer.beerapp.dataAccess.local.DataAccess;
 import com.keithloughnane.beer.beerapp.dependencyInjection.AppComponent;
 import com.keithloughnane.beer.beerapp.models.BeerModel;
 
 import io.reactivex.disposables.Disposable;
-import io.reactivex.disposables.Disposables;
 
 /**
  * Created by user on 06/01/2018.
@@ -18,12 +18,8 @@ public class FavoriteActivityController extends ControllerWithAdapter {
 
     @Override
     protected Disposable setUpSubscriptions() {
-        super.setUpSubscriptions();
-
-        //selectMode.onNext(DataAccess.SelectType.FAV);
-        //networkObserver.sub.onNext(true);
-
-        return Disposables.empty();
+        selectMode.onNext(DataAccess.SelectType.FAV);
+        return super.setUpSubscriptions();
     }
 
     @Override
