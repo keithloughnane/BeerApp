@@ -1,12 +1,13 @@
-package com.keithloughnane.beer.beerapp.activities;
+package com.keithloughnane.beer.beerapp.view;
 
-import android.graphics.ColorSpace;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.keithloughnane.beer.beerapp.AppComponent;
+import com.keithloughnane.beer.beerapp.dependencyInjection.AppComponent;
 import com.keithloughnane.beer.beerapp.BeerApplication;
+import com.keithloughnane.beer.beerapp.controllers.Controller;
+import com.keithloughnane.beer.beerapp.models.BeerModel;
 
 /**
  * Created by keith.loughnane@gmail.com on 04/01/2018.

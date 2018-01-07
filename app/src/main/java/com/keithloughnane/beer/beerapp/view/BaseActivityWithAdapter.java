@@ -1,4 +1,4 @@
-package com.keithloughnane.beer.beerapp.activities;
+package com.keithloughnane.beer.beerapp.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,10 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.keithloughnane.beer.beerapp.BeerViewHolder;
-import com.keithloughnane.beer.beerapp.ControllerWithAdapter;
+import com.keithloughnane.beer.beerapp.controllers.ControllerWithAdapter;
 import com.keithloughnane.beer.beerapp.R;
-import com.keithloughnane.beer.beerapp.dataAccess.DataAccess;
+import com.keithloughnane.beer.beerapp.dataAccess.local.DataAccess;
 
 import javax.inject.Inject;
 

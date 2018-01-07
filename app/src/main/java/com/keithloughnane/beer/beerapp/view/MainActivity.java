@@ -1,14 +1,16 @@
-package com.keithloughnane.beer.beerapp.activities;
+package com.keithloughnane.beer.beerapp.view;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
 import com.jakewharton.rxbinding2.view.RxView;
-import com.keithloughnane.beer.beerapp.AppComponent;
 import com.keithloughnane.beer.beerapp.BeerApplication;
 import com.keithloughnane.beer.beerapp.R;
-import com.keithloughnane.beer.beerapp.dataAccess.DataAccess;
+import com.keithloughnane.beer.beerapp.controllers.Controller;
+import com.keithloughnane.beer.beerapp.controllers.MainActivityController;
+import com.keithloughnane.beer.beerapp.dataAccess.local.DataAccess;
+import com.keithloughnane.beer.beerapp.models.BeerModel;
 
 import butterknife.BindView;
 import butterknife.OnClick;

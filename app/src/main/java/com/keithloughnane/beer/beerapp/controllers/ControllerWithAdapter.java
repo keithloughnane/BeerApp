@@ -1,11 +1,11 @@
-package com.keithloughnane.beer.beerapp;
+package com.keithloughnane.beer.beerapp.controllers;
 
 import android.util.Log;
 
-import com.keithloughnane.beer.beerapp.activities.BeerModel;
-import com.keithloughnane.beer.beerapp.activities.Controller;
+import com.keithloughnane.beer.beerapp.util.NetworkObserver;
+import com.keithloughnane.beer.beerapp.models.BeerModel;
 import com.keithloughnane.beer.beerapp.data.Beer;
-import com.keithloughnane.beer.beerapp.dataAccess.DataAccess;
+import com.keithloughnane.beer.beerapp.dataAccess.local.DataAccess;
 
 import java.util.List;
 

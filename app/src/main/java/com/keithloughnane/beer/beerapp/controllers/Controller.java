@@ -1,9 +1,9 @@
-package com.keithloughnane.beer.beerapp.activities;
+package com.keithloughnane.beer.beerapp.controllers;
 
 
-import com.keithloughnane.beer.beerapp.AppComponent;
+import com.keithloughnane.beer.beerapp.dependencyInjection.AppComponent;
+import com.keithloughnane.beer.beerapp.models.BeerModel;
 
-import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 /**
@@ -19,7 +19,7 @@ public abstract class Controller {
         model = beerModel;
     }
 
-    void SetUp() {
+    public void SetUp() {
         subscription = setUpSubscriptions();
     }
 

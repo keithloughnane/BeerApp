@@ -1,5 +1,6 @@
-package com.keithloughnane.beer.beerapp.activities;
+package com.keithloughnane.beer.beerapp.models;
 
+import com.keithloughnane.beer.beerapp.view.BeerView;
 import com.keithloughnane.beer.beerapp.data.Beer;
 
 import java.util.ArrayList;

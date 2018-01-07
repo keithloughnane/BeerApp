@@ -1,8 +1,8 @@
-package com.keithloughnane.beer.beerapp;
+package com.keithloughnane.beer.beerapp.dependencyInjection;
 
-import com.keithloughnane.beer.beerapp.activities.FavoriteActivityController;
-import com.keithloughnane.beer.beerapp.activities.MainActivity;
-import com.keithloughnane.beer.beerapp.activities.MainActivityController;
+import com.keithloughnane.beer.beerapp.controllers.FavoriteActivityController;
+import com.keithloughnane.beer.beerapp.view.MainActivity;
+import com.keithloughnane.beer.beerapp.controllers.MainActivityController;
 
 import javax.inject.Singleton;
 

@@ -1,4 +1,4 @@
-package com.keithloughnane.beer.beerapp;
+package com.keithloughnane.beer.beerapp.view;
 
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -8,7 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jakewharton.rxbinding2.view.RxView;
-import com.keithloughnane.beer.beerapp.activities.BeerProfileActivity;
+import com.keithloughnane.beer.beerapp.controllers.ControllerWithAdapter;
+import com.keithloughnane.beer.beerapp.R;
+import com.keithloughnane.beer.beerapp.view.BeerProfileActivity;
 import com.keithloughnane.beer.beerapp.data.Beer;
 import com.squareup.picasso.Picasso;
 

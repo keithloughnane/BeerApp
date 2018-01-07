@@ -1,19 +1,14 @@
-package com.keithloughnane.beer.beerapp.activities;
+package com.keithloughnane.beer.beerapp.controllers;
 
 import android.util.Log;
 
-import com.keithloughnane.beer.beerapp.AppComponent;
-import com.keithloughnane.beer.beerapp.ControllerWithAdapter;
-import com.keithloughnane.beer.beerapp.NetworkObserver;
-import com.keithloughnane.beer.beerapp.data.Beer;
-import com.keithloughnane.beer.beerapp.dataAccess.DataAccess;
-
-import java.util.List;
+import com.keithloughnane.beer.beerapp.dependencyInjection.AppComponent;
+import com.keithloughnane.beer.beerapp.models.BeerModel;
+import com.keithloughnane.beer.beerapp.dataAccess.local.DataAccess;
 
 import javax.inject.Inject;
 
 import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.disposables.Disposables;
 import io.reactivex.subjects.PublishSubject;
@@ -33,7 +28,7 @@ public class MainActivityController extends ControllerWithAdapter {
     public PublishSubject<Object> favouriteClick = PublishSubject.create();
     //PublishSubject<DataAccess.SelectType> selectMode = PublishSubject.create();
 
-    MainActivityController(BeerModel beerMode) {
+    public MainActivityController(BeerModel beerMode) {
         super(beerMode);
     }
 

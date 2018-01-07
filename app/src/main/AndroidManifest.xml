@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,11 +20,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.BeerProfileActivity"
+            android:name=".view.BeerProfileActivity"
             android:label="@string/title_activity_beer_profile"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.FavoriteActivity"
+            android:name=".view.FavoriteActivity"
             android:label="@string/title_activity_favorite"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

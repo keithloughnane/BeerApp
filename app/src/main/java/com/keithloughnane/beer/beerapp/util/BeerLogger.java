@@ -1,4 +1,4 @@
-package com.keithloughnane.beer.beerapp.dataAccess;
+package com.keithloughnane.beer.beerapp.util;
 
 import android.util.Log;
 

@@ -2,6 +2,10 @@ package com.keithloughnane.beer.beerapp;
 
 import android.app.Application;
 
+import com.keithloughnane.beer.beerapp.dependencyInjection.AppComponent;
+import com.keithloughnane.beer.beerapp.dependencyInjection.AppModule;
+import com.keithloughnane.beer.beerapp.dependencyInjection.DaggerAppComponent;
+
 /**
  * Created by keith.loughnane@gmail.com on 03/01/2018.
  */

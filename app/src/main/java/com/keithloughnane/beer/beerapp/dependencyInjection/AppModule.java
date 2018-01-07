@@ -1,14 +1,13 @@
-package com.keithloughnane.beer.beerapp;
+package com.keithloughnane.beer.beerapp.dependencyInjection;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;
 
-import com.keithloughnane.beer.beerapp.dataAccess.BeerLogger;
-import com.keithloughnane.beer.beerapp.dataAccess.DataAccess;
+import com.keithloughnane.beer.beerapp.util.BeerLogger;
+import com.keithloughnane.beer.beerapp.util.NetworkObserver;
+import com.keithloughnane.beer.beerapp.dataAccess.local.DataAccess;
 import com.keithloughnane.beer.beerapp.dataAccess.local.AppDatabase;
 import com.keithloughnane.beer.beerapp.dataAccess.remote.BeerApiService;
-
-import java.util.logging.Logger;
 
 import javax.inject.Singleton;
 

@@ -1,4 +1,4 @@
-package com.keithloughnane.beer.beerapp.activities;
+package com.keithloughnane.beer.beerapp.view;
 
 /**
  * Created by keith.loughnane@gmail.com on 05/01/2018.

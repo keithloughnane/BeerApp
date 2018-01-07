@@ -1,4 +1,4 @@
-package com.keithloughnane.beer.beerapp;
+package com.keithloughnane.beer.beerapp.util;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 
-import com.keithloughnane.beer.beerapp.dataAccess.BeerLogger;
+import com.keithloughnane.beer.beerapp.util.BeerLogger;
 
 import io.reactivex.subjects.BehaviorSubject;
 
@@ -17,7 +17,7 @@ import io.reactivex.subjects.BehaviorSubject;
 public class NetworkObserver {
     public BehaviorSubject<Boolean> sub = BehaviorSubject.create().create();
 
-    NetworkObserver(Context context, final BeerLogger logger) {
+    public NetworkObserver(Context context, final BeerLogger logger) {
         sub.onNext(true);
 
         final IntentFilter netIntentFilter = new IntentFilter();

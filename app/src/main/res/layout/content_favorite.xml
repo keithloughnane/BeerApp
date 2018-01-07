@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.keithloughnane.beer.beerapp.activities.FavoriteActivity"
+    tools:context="com.keithloughnane.beer.beerapp.view.FavoriteActivity"
     tools:showIn="@layout/activity_favorite">
 
 </android.support.constraint.ConstraintLayout>

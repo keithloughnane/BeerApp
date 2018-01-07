@@ -1,10 +1,10 @@
-package com.keithloughnane.beer.beerapp.dataAccess;
+package com.keithloughnane.beer.beerapp.dataAccess.local;
 
 import android.util.Log;
 import android.util.Pair;
 
+import com.keithloughnane.beer.beerapp.util.BeerLogger;
 import com.keithloughnane.beer.beerapp.data.Beer;
-import com.keithloughnane.beer.beerapp.dataAccess.local.BeerStorage;
 import com.keithloughnane.beer.beerapp.dataAccess.remote.BeerApiService;
 
 import java.util.List;
@@ -15,7 +15,6 @@ import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
-import io.reactivex.subjects.PublishSubject;
 
 /**
  * Created by keith.loughnane@gmail.com on 04/01/2018.
