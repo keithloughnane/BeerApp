@@ -70,4 +70,9 @@ public class BeerServiceWrapper implements DataService {
             }
         });
     }
+
+    @Override
+    public void update(Beer beer) {
+        //TODO KL: Get rid of me
+    }
 }

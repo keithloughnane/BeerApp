@@ -27,8 +27,6 @@ import io.reactivex.subjects.PublishSubject;
 
 public class FavoriteActivityController extends ControllerWithAdapter {
 
-    @Inject
-    DataAccess dataAccess; //TODO KL: Move to super
 
     @Inject
     NetworkObserver networkObserver;

@@ -3,6 +3,9 @@ package com.keithloughnane.beer.beerapp;
 import com.keithloughnane.beer.beerapp.activities.BeerModel;
 import com.keithloughnane.beer.beerapp.activities.Controller;
 import com.keithloughnane.beer.beerapp.data.Beer;
+import com.keithloughnane.beer.beerapp.dataAccess.DataAccess;
+
+import javax.inject.Inject;
 
 import io.reactivex.Observer;
 import io.reactivex.functions.Consumer;
@@ -14,7 +17,11 @@ import io.reactivex.subjects.PublishSubject;
 
 public abstract class ControllerWithAdapter extends Controller {
     public PublishSubject<Beer> holderClick = PublishSubject.create();
-    public PublishSubject<Object> favoriteClick = PublishSubject.create();
+    public PublishSubject<Beer> favoriteClick = PublishSubject.create();
+
+    @Inject
+    public
+    DataAccess dataAccess; //TODO KL: Move to super
 
     public ControllerWithAdapter(BeerModel beerModel) {
         super(beerModel);
@@ -28,10 +35,10 @@ public abstract class ControllerWithAdapter extends Controller {
             }
         });
 
-        favoriteClick.subscribe(new Consumer<Object>() {
+        favoriteClick.subscribe(new Consumer<Beer>() {
             @Override
-            public void accept(Object o) throws Exception {
-                 //TODO KL: Update here
+            public void accept(Beer beer) throws Exception {
+                 dataAccess.update(beer);
             }
         });
     } //TODO KL: Rename

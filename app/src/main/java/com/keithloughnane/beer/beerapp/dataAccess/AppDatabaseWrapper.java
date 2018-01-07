@@ -46,6 +46,11 @@ public class AppDatabaseWrapper implements DataService {
         return Observable.just(appDatabase.beerStorage().getIbuBeer());
     }
 
+    @Override
+    public void update(Beer beer) {
+        appDatabase.beerStorage().updateBeer(beer.favorite, beer.id);
+    }
+
     public void insert(List<Beer> beers) {
         appDatabase.beerStorage().insertAll(beers);
     }

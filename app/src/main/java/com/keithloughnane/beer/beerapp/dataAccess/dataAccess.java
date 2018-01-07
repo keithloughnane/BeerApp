@@ -99,6 +99,10 @@ public class DataAccess { //TODO KL: Better names
                 });
     }
 
+    public void update(Beer beer) {
+        localService.update(beer);
+    }
+
     public enum SelectType {
         ABV, IBU, EBC, FAV, ALL;
     }

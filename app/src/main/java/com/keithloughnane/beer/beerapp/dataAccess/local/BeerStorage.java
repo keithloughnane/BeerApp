@@ -50,4 +50,8 @@ public interface BeerStorage {
 
     @Delete
     void delete(Beer... beers);
+
+    @Query("UPDATE beer SET favorite= :favorite WHERE id = :id")
+    int updateBeer(boolean favorite, int id);
+
 }

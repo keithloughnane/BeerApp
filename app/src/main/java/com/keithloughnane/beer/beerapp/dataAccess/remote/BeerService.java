@@ -29,4 +29,7 @@ public interface BeerService {
 
     @GET("beers")
     Observable<ArrayList<Beer>> getIbuBeer();
+
+
+    void updateBeer(Beer beer);
 }

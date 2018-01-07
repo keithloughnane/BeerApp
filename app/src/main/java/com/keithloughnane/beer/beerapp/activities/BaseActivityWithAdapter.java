@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.keithloughnane.beer.beerapp.BeerViewHolder;
 import com.keithloughnane.beer.beerapp.ControllerWithAdapter;
@@ -35,6 +36,12 @@ abstract class BaseActivityWithAdapter<B, M> extends BaseActivity implements Bee
     @BindView(R.id.content_view)
     RecyclerView recyclerView;
 
+    @BindView(R.id.progress)
+    ProgressBar progressBar;
+
+    @BindView(R.id.failureIcon)
+    View failure;
+
     @Inject
     DataAccess dataAccess;
 
@@ -54,15 +61,23 @@ abstract class BaseActivityWithAdapter<B, M> extends BaseActivity implements Bee
 
     @Override
     public void downloadComplete() {
-
-
-
         adapter.notifyDataSetChanged();
+        progressBar.setVisibility(View.GONE);
+
+
+        if (model.beers.size() == 0) {
+            failure.setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+        }
+
     }
 
     @Override
     public void downloadStarted() {
-
+        recyclerView.setVisibility(View.GONE);
+        failure.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     class Adapter extends RecyclerView.Adapter<BeerViewHolder> {

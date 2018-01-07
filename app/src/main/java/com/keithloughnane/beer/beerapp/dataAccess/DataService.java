@@ -20,4 +20,6 @@ public interface DataService {
     Observable<List<Beer>> getEbcBeer();
 
     Observable<List<Beer>> getIbuBeer();
+
+    void update(Beer beer);
 }
