@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.keithloughnane.beer.beerapp.R;
-import com.keithloughnane.beer.beerapp.controllers.Controller;
 import com.keithloughnane.beer.beerapp.controllers.ControllerWithAdapter;
 import com.keithloughnane.beer.beerapp.dataAccess.local.DataAccess;
 import com.keithloughnane.beer.beerapp.models.BeerModel;
@@ -43,7 +42,7 @@ abstract class BaseActivityWithBeerAdapter<M extends BeerModel, C extends Contro
     class Adapter extends RecyclerView.Adapter<BeerViewHolder> {
         @Override
         public BeerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new BeerViewHolder(LayoutInflater.from(getBaseContext()).inflate(R.layout.beer_view_holder, null), (ControllerWithAdapter) controller); //TODO KL: Refactor to avoid cast
+            return new BeerViewHolder(LayoutInflater.from(getBaseContext()).inflate(R.layout.beer_view_holder, null), controller); //TODO KL: Refactor to avoid cast
         }
 
         @Override

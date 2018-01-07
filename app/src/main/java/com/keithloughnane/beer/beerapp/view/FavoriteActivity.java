@@ -3,7 +3,6 @@ package com.keithloughnane.beer.beerapp.view;
 import android.os.Bundle;
 
 import com.keithloughnane.beer.beerapp.R;
-import com.keithloughnane.beer.beerapp.controllers.Controller;
 import com.keithloughnane.beer.beerapp.controllers.FavoriteActivityController;
 import com.keithloughnane.beer.beerapp.models.BeerModel;
 
