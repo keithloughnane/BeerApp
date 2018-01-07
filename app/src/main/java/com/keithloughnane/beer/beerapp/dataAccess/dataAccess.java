@@ -5,13 +5,13 @@ import android.util.Pair;
 
 import com.keithloughnane.beer.beerapp.data.Beer;
 import com.keithloughnane.beer.beerapp.dataAccess.local.AppDatabase;
+import com.keithloughnane.beer.beerapp.dataAccess.remote.BeerService;
 
 import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.functions.BiFunction;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
@@ -23,16 +23,16 @@ public class DataAccess { //TODO KL: Better names
 
     private static final String TAG = "BeerLog";
     private final Observable<Boolean> networkStatus;
-    boolean refreshed = false;
-    private DataService remoteService;
+    private final BeerLogger logger;
+    private boolean refreshed = false; //TODO, Maybe should be in model
+    private BeerService remoteService;
     private DataService localService;
-    private DataService dataService;
 
-    public DataAccess(BeerServiceWrapper remoteService, AppDatabaseWrapper localService, final AppDatabase d, Observable<Boolean> networkStatus) {
+    public DataAccess(BeerService remoteService, AppDatabaseWrapper localService, final AppDatabase d, Observable<Boolean> networkStatus, BeerLogger logger) {
         this.remoteService = remoteService;
         this.localService = localService;
-
-        dataService = localService;
+        //dataService = localService;
+        this.logger = logger;
 
         this.networkStatus = networkStatus;
     }
@@ -60,6 +60,8 @@ public class DataAccess { //TODO KL: Better names
                                         public Observable<Pair<Boolean, SelectType>> apply(List<Beer> beers) throws Exception {
                                             ((AppDatabaseWrapper) localService).insert(beers);
                                             refreshed = true;
+                                            logger.d("Test");
+                                            logger.e("Test");
                                             Log.d("KLTest", "sub 300");
                                             return Observable.just(booleanIntegerPair); //TODO KL: Changed to doOnNext and just
                                         }

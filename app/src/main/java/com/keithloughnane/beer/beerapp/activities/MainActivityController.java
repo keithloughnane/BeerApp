@@ -73,7 +73,7 @@ public class MainActivityController extends ControllerWithAdapter {
         Log.e("KLTest", "onNext");
 
         selectMode.onNext(DataAccess.SelectType.ALL);
-        networkObserver.sub.onNext(false);
+        networkObserver.sub.onNext(true);
 
 
         favouriteClick

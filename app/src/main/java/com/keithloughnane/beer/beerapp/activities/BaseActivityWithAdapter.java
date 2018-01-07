@@ -65,11 +65,11 @@ abstract class BaseActivityWithAdapter<B, M> extends BaseActivity implements Bee
         progressBar.setVisibility(View.GONE);
 
 
-        if (model.beers.size() == 0) {
-            failure.setVisibility(View.VISIBLE);
-        } else {
+        //if (model.beers.size() == 0) {
+        //    failure.setVisibility(View.VISIBLE);
+        //} else {
             recyclerView.setVisibility(View.VISIBLE);
-        }
+        //}
 
     }
 

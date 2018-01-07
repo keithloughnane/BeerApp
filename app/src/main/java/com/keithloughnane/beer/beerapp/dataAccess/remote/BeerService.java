@@ -14,22 +14,6 @@ import retrofit2.http.GET;
  */
 
 public interface BeerService {
-
     @GET("beers")
-    Observable<ArrayList<Beer>> getAllBeers();
-
-    @GET("beers")
-    Observable<ArrayList<Beer>> getFavBeer();
-
-    @GET("beers")
-    Observable<ArrayList<Beer>> getAbvBeer();
-
-    @GET("beers")
-    Observable<ArrayList<Beer>> getEbcBeer();
-
-    @GET("beers")
-    Observable<ArrayList<Beer>> getIbuBeer();
-
-
-    void updateBeer(Beer beer);
+    Observable<List<Beer>> getAllBeers();
 }
