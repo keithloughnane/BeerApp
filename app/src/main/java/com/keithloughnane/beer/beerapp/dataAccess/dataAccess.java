@@ -40,7 +40,6 @@ public class DataAccess { //TODO KL: Better names
     public Observable<List<Beer>> sub(BehaviorSubject<SelectType> selectMode) {
         Log.d("KLTest", "sub 000");
         return Observable
-
                 .combineLatest(networkStatus, selectMode, new BiFunction<Boolean, SelectType, Pair<Boolean, SelectType>>() {
             @Override
             public Pair<Boolean, SelectType> apply(Boolean networkStatus, SelectType selectMode) throws Exception {
@@ -81,6 +80,7 @@ public class DataAccess { //TODO KL: Better names
                 })
                 .observeOn(Schedulers.io())
                 .subscribeOn(Schedulers.io())
+                //TODO KL: If has already and SelectMode is the same don't reload
                 .flatMap(new Function<Pair<Boolean, SelectType>, Observable<List<Beer>>>() {
                     @Override
                     public Observable<List<Beer>> apply(Pair<Boolean, SelectType> booleanIntegerPair) throws Exception {

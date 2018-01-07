@@ -8,6 +8,8 @@ import com.keithloughnane.beer.beerapp.dataAccess.DataAccess;
 import com.keithloughnane.beer.beerapp.dataAccess.local.AppDatabase;
 import com.keithloughnane.beer.beerapp.dataAccess.remote.BeerApiService;
 
+import java.util.logging.Logger;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -63,8 +65,8 @@ public class AppModule {
 
     @Provides
     @Singleton
-    public NetworkObserver providesNetworkObserver() {
-        return new NetworkObserver();
+    public NetworkObserver providesNetworkObserver(Context context, BeerLogger logger) {
+        return new NetworkObserver(context, logger);
     }
 
     @Provides

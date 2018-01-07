@@ -63,11 +63,12 @@ abstract class BaseActivityWithAdapter<B, M> extends BaseActivity implements Bee
     public void downloadComplete() {
         adapter.notifyDataSetChanged();
         progressBar.setVisibility(View.GONE);
-
-
+        
         if (model.beers.size() == 0) {
             failure.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
         } else {
+            failure.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
         }
 
