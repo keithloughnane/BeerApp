@@ -15,9 +15,9 @@ import io.reactivex.functions.Function;
 
 /* TODO KL: Delete me
 public class BeerServiceWrapper implements DataService {
-    private final BeerService appDatabase;
+    private final BeerApiService appDatabase;
 
-    public BeerServiceWrapper(BeerService localAccess) {
+    public BeerServiceWrapper(BeerApiService localAccess) {
         this.appDatabase = localAccess;
     }
 

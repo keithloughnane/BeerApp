@@ -6,7 +6,7 @@ import android.content.Context;
 import com.keithloughnane.beer.beerapp.dataAccess.BeerLogger;
 import com.keithloughnane.beer.beerapp.dataAccess.DataAccess;
 import com.keithloughnane.beer.beerapp.dataAccess.local.AppDatabase;
-import com.keithloughnane.beer.beerapp.dataAccess.remote.BeerService;
+import com.keithloughnane.beer.beerapp.dataAccess.remote.BeerApiService;
 
 import javax.inject.Singleton;
 
@@ -30,14 +30,14 @@ public class AppModule {
 
     @Provides
     @Singleton
-    BeerService remoteData() {
+    BeerApiService remoteData() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.punkapi.com/v2/")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        BeerService service = retrofit.create(BeerService.class);
+        BeerApiService service = retrofit.create(BeerApiService.class);
 
         return service;
     }
@@ -51,7 +51,7 @@ public class AppModule {
 
     @Provides
     @Singleton
-    public DataAccess dataAccess(BeerService localAccess, AppDatabase remoteAccess, NetworkObserver networkObserver, BeerLogger logger) {
+    public DataAccess dataAccess(BeerApiService localAccess, AppDatabase remoteAccess, NetworkObserver networkObserver, BeerLogger logger) {
         return new DataAccess(localAccess, remoteAccess.beerStorage(), networkObserver.sub, logger);
     }
 

@@ -4,9 +4,8 @@ import android.util.Log;
 import android.util.Pair;
 
 import com.keithloughnane.beer.beerapp.data.Beer;
-import com.keithloughnane.beer.beerapp.dataAccess.local.AppDatabase;
 import com.keithloughnane.beer.beerapp.dataAccess.local.BeerStorage;
-import com.keithloughnane.beer.beerapp.dataAccess.remote.BeerService;
+import com.keithloughnane.beer.beerapp.dataAccess.remote.BeerApiService;
 
 import java.util.List;
 
@@ -26,12 +25,12 @@ public class DataAccess { //TODO KL: Better names
     private final Observable<Boolean> networkStatus;
     private final BeerLogger logger;
     private boolean refreshed = false; //TODO, Maybe should be in model
-    private BeerService remoteService;
-    private BeerStorage localService;
+    private BeerApiService remoteApiService;
+    private BeerStorage localStorage;
 
-    public DataAccess(BeerService remoteService, BeerStorage localService, Observable<Boolean> networkStatus, BeerLogger logger) {
-        this.remoteService = remoteService;
-        this.localService = localService;
+    public DataAccess(BeerApiService remoteService, BeerStorage localStorage, Observable<Boolean> networkStatus, BeerLogger logger) {
+        this.remoteApiService = remoteService;
+        this.localStorage = localStorage;
         this.logger = logger;
         this.networkStatus = networkStatus;
     }
@@ -51,13 +50,13 @@ public class DataAccess { //TODO KL: Better names
                     public Observable<Pair<Boolean, SelectType>> apply(final Pair<Boolean, SelectType> booleanIntegerPair) throws Exception {
                         if (booleanIntegerPair.first && !refreshed) {
                             Log.d("KLTest", "sub 200");
-                            return remoteService.getAllBeers()
+                            return remoteApiService.getAllBeers()
                                     .observeOn(Schedulers.io())
                                     .subscribeOn(Schedulers.io())
                                     .flatMap(new Function<List<Beer>, Observable<Pair<Boolean, SelectType>>>() {
                                         @Override
                                         public Observable<Pair<Boolean, SelectType>> apply(List<Beer> beers) throws Exception {
-                                            localService.insertAll(beers);
+                                            localStorage.insertAll(beers);
                                             refreshed = true;
                                             logger.d("Test");
                                             logger.e("Test");
@@ -85,23 +84,23 @@ public class DataAccess { //TODO KL: Better names
                         Log.d("KLTest", "sub 500");
                         switch (booleanIntegerPair.second) {
                             case ABV:
-                                return Observable.just(localService.getAbvBeer());
+                                return Observable.just(localStorage.getAbvBeer());
                             case IBU:
-                                return Observable.just(localService.getIbuBeer());
+                                return Observable.just(localStorage.getIbuBeer());
                             case EBC:
-                                return Observable.just(localService.getEbcBeer());
+                                return Observable.just(localStorage.getEbcBeer());
                             case FAV:
-                                return Observable.just(localService.getFavBeer());
+                                return Observable.just(localStorage.getFavBeer());
                             case ALL:
                             default:
-                                return Observable.just(localService.getAllBeers());
+                                return Observable.just(localStorage.getAllBeers());
                         }
                     }
                 });
     }
 
     public void update(Beer beer) {
-        localService.updateBeer(beer.favorite, beer.id);
+        localStorage.updateBeer(beer.favorite, beer.id); //TODO KL: Maybe make observable
     }
 
     public enum SelectType {
