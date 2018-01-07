@@ -15,7 +15,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.functions.Consumer;
 
-public class MainActivity extends BaseActivityWithBeerAdapter<BeerModel, MainActivityController> {
+public class MainActivity extends BaseActivityWithBeerAdapter<MainActivityController> {
 
     @BindView(R.id.abv)
     Button abv;
@@ -64,13 +64,6 @@ public class MainActivity extends BaseActivityWithBeerAdapter<BeerModel, MainAct
     @OnClick(R.id.ebc)
     public void ebcClick() {
         controller.selectMode.onNext(DataAccess.SelectType.EBC);
-    }
-
-    @Override
-    protected BeerModel createModel() {
-        BeerModel model = new BeerModel();
-        model.view = this;
-        return model;
     }
 
     @Override

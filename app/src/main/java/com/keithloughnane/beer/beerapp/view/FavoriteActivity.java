@@ -6,19 +6,12 @@ import com.keithloughnane.beer.beerapp.R;
 import com.keithloughnane.beer.beerapp.controllers.FavoriteActivityController;
 import com.keithloughnane.beer.beerapp.models.BeerModel;
 
-public class FavoriteActivity extends BaseActivityWithBeerAdapter<BeerModel, FavoriteActivityController> {
+public class FavoriteActivity extends BaseActivityWithBeerAdapter<FavoriteActivityController> {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_favorite);
         super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    protected BeerModel createModel() { //TODO KL: Move to Super. Generics should take care of
-        BeerModel model = new BeerModel();
-        model.view = this;
-        return model;
     }
 
     @Override

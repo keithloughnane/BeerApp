@@ -19,8 +19,12 @@ public abstract class Controller {
         model = beerModel;
     }
 
-    public void SetUp() {
+    public void setUp() {
         subscription = setUpSubscriptions();
+    }
+
+    public void dispose() {
+        subscription.dispose();
     }
 
     protected abstract Disposable setUpSubscriptions();

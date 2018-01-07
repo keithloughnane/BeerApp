@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
  * Created by keith.loughnane@gmail.com on 04/01/2018.
  */
 
-abstract class BaseActivityWithBeerAdapter<M extends BeerModel, C extends ControllerWithAdapter> extends BaseActivity<M, C> implements BeerView {
+abstract class BaseActivityWithBeerAdapter<C extends ControllerWithAdapter> extends BaseActivity<BeerModel, C> implements BeerView {
 
     @Inject
     DataAccess dataAccess;
@@ -61,6 +61,13 @@ abstract class BaseActivityWithBeerAdapter<M extends BeerModel, C extends Contro
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected BeerModel createModel() { //TODO KL: Move to Super. Generics should take care of
+        BeerModel model = new BeerModel();
+        model.view = this;
+        return model;
     }
 
     @Override

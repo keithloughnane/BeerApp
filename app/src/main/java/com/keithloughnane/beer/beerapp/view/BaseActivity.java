@@ -30,7 +30,13 @@ public abstract class BaseActivity<M extends BeerModel, C extends Controller> ex
         controller = createController();
 
         injectController(component);
-        controller.SetUp();
+        controller.setUp();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        controller.dispose();
     }
 
     protected abstract M createModel();
