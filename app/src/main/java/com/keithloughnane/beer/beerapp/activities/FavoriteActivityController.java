@@ -28,10 +28,7 @@ import io.reactivex.subjects.PublishSubject;
 public class FavoriteActivityController extends ControllerWithAdapter {
 
 
-    @Inject
-    NetworkObserver networkObserver;
 
-    PublishSubject<DataAccess.SelectType> selectMode = PublishSubject.create();
 
     public FavoriteActivityController(BeerModel model) {
         super(model);
@@ -39,7 +36,9 @@ public class FavoriteActivityController extends ControllerWithAdapter {
 
     @Override
     protected Disposable setUpSubscriptions() {
-        model.view.downloadStarted();
+        super.setUpSubscriptions();
+
+
 
         /*
         dataAccess.getAllBeer()
@@ -70,36 +69,7 @@ public class FavoriteActivityController extends ControllerWithAdapter {
                 });
 */
 
-        dataAccess.sub(selectMode)
-                //.subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<Beer>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        Log.d("KLTest", "onSubscribe : " + d);
-                    }
 
-                    @Override
-                    public void onNext(List<Beer> beers) { //TODO KL: Should I be using this
-                        Log.d("KLTest", "CONTROLLER:" + beers);
-                        model.beers.clear();
-                        model.beers.addAll(beers);
-                        model.view.downloadComplete();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e("KLTest", "onError: " + e);
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-
-        selectMode.onNext(DataAccess.SelectType.ALL);
-        networkObserver.sub.onNext(true);
 
         return Disposables.empty();
     }

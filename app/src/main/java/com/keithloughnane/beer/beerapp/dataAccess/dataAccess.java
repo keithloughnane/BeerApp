@@ -58,16 +58,14 @@ public class DataAccess { //TODO KL: Better names
                                         public Observable<Pair<Boolean, SelectType>> apply(List<Beer> beers) throws Exception {
                                             localStorage.insertAll(beers);
                                             refreshed = true;
-                                            logger.d("Test");
-                                            logger.e("Test");
-                                            Log.d("KLTest", "sub 300");
+                                            logger.d("Api success. Retrieved item size : " + beers.size());
                                             return Observable.just(booleanIntegerPair); //TODO KL: Changed to doOnNext and just
                                         }
                                     })
                                     .onErrorResumeNext(new Function<Throwable, ObservableSource<Pair<Boolean, SelectType>>>() {
                                         @Override
                                         public ObservableSource<Pair<Boolean, SelectType>> apply(Throwable throwable) throws Exception {
-                                            Log.d("KLTest", "sub E400");
+                                            logger.e("Api failure : " + throwable);
                                             return Observable.just(booleanIntegerPair); //TODO KL: Changed to doOnNext and just
                                         }
                                     });

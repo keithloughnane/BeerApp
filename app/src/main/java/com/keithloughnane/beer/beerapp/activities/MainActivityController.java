@@ -39,8 +39,12 @@ public class MainActivityController extends ControllerWithAdapter {
 
     @Override
     protected Disposable setUpSubscriptions() {
-        model.view.downloadStarted();
-        Log.e("KLTest", "setUpSubscriptions");
+        super.setUpSubscriptions();
+
+        //model.view.downloadStarted();
+        //Log.e("KLTest", "setUpSubscriptions");
+
+        /*
         dataAccess.sub(selectMode)
                 //.subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -74,7 +78,7 @@ public class MainActivityController extends ControllerWithAdapter {
 
         selectMode.onNext(DataAccess.SelectType.ALL);
         networkObserver.sub.onNext(true);
-
+*/
 
         favouriteClick
                 //.subscribe();
