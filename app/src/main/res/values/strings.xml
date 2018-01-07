@@ -11,4 +11,9 @@
     <string name="favorites">Favorites</string>
     <string name="favorites_subtitle">Your saved beers go here</string>
     <string name="no_favs">No Favorites yet</string>
+    <string name="abv_s">ABV %s</string>
+    <string name="ibu_s">IBU %s</string>
+    <string name="ebc_s">EBC %s</string>
+    <string name="srm_s">SRM %s</string>
+    <string name="ph_s">PH %s</string>
 </resources>

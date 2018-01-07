@@ -8,7 +8,7 @@ import io.reactivex.Observable;
 import retrofit2.http.GET;
 
 /**
- * Created by user on 03/01/2018.
+ * Created by keith.loughnane@gmail.com on 03/01/2018.
  */
 
 public interface BeerApiService {

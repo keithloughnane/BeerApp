@@ -1,7 +1,7 @@
 package com.keithloughnane.beer.beerapp.dataAccess.local;
 
 /**
- * Created by user on 03/01/2018.
+ * Created by keith.loughnane@gmail.com on 03/01/2018.
  */
 
 import android.arch.persistence.room.Dao;

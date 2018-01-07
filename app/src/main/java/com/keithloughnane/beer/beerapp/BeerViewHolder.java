@@ -14,7 +14,6 @@ import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
@@ -24,7 +23,7 @@ import static android.support.v4.content.ContextCompat.getDrawable;
 import static android.support.v4.content.ContextCompat.startActivity;
 
 /**
- * Created by user on 04/01/2018.
+ * Created by keith.loughnane@gmail.com on 04/01/2018.
  */
 
 public class BeerViewHolder extends RecyclerView.ViewHolder {
@@ -48,9 +47,6 @@ public class BeerViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.ebc)
     TextView ebc;
 
-    @BindView(R.id.srm)
-    TextView srm;
-
     @BindView(R.id.ph)
     TextView ph;
 
@@ -61,18 +57,18 @@ public class BeerViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         this.controller = controller;
         ButterKnife.bind(this, itemView);
-
     }
 
     public void bind(final Beer beer) {
         title.setText(beer.name);
         tagLine.setText(beer.tagline);
-        abv.setText("" + beer.abv);
-        ibu.setText("" + beer.ibu);
-        srm.setText("" + beer.srm);
-        ph.setText("" + beer.ph);
-        setFavoritIcon(beer);
 
+        abv.setText(itemView.getResources().getString(R.string.abv_s, beer.abv));
+        ibu.setText(itemView.getResources().getString(R.string.ibu_s, beer.ibu));
+        ebc.setText(itemView.getResources().getString(R.string.ebc_s, beer.srm));
+        ph.setText(itemView.getResources().getString(R.string.ph_s, beer.ph));
+
+        setFavoriteIcon(beer);
 
         Picasso
                 .with(itemView.getContext())
@@ -81,9 +77,7 @@ public class BeerViewHolder extends RecyclerView.ViewHolder {
                 .centerInside()
                 .into(beerImage);
 
-        Scheduler tesht = Schedulers.io();
-
-        setFavoritIcon(beer);
+        setFavoriteIcon(beer);
 
         RxView.clicks(favorite)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -91,7 +85,7 @@ public class BeerViewHolder extends RecyclerView.ViewHolder {
                     @Override
                     public void accept(Object o) throws Exception {
                         beer.favorite = !beer.favorite;
-                        setFavoritIcon(beer);
+                        setFavoriteIcon(beer);
                     }
                 })
                 .map(new Function<Object, Beer>() {
@@ -100,12 +94,11 @@ public class BeerViewHolder extends RecyclerView.ViewHolder {
                         return beer;
                     }
                 })
-                .observeOn(tesht)
+                .observeOn(Schedulers.io())
                 .subscribe(controller.favoriteClick);
 
         RxView.clicks(itemView)
                 .map(new Function<Object, Beer>() {
-
                     @Override
                     public Beer apply(Object o) throws Exception {
                         return beer;
@@ -115,15 +108,6 @@ public class BeerViewHolder extends RecyclerView.ViewHolder {
                     @Override
                     public void accept(Beer beer) throws Exception {
                         Intent intent = new Intent(itemView.getContext(), BeerProfileActivity.class);
-
-                        /*
-                                Intent intent = new Intent(this, DisplayMessageActivity.class);
-        EditText editText = (EditText) findViewById(R.id.editText);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
-                         */
-
                         intent.putExtra(BeerProfileActivity.BEER_PARAM, beer);
                         startActivity(itemView.getContext(), intent, null);
                     }
@@ -131,7 +115,7 @@ public class BeerViewHolder extends RecyclerView.ViewHolder {
                 .subscribe(controller.holderClick);
     }
 
-    private void setFavoritIcon(Beer beer) {
+    private void setFavoriteIcon(Beer beer) {
         favorite.setBackground(getDrawable(itemView.getContext(), beer.favorite ? R.drawable.favourite_checked : R.drawable.favourite_unchecked));
     }
 }

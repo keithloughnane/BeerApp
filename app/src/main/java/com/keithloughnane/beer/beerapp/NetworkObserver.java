@@ -11,7 +11,7 @@ import com.keithloughnane.beer.beerapp.dataAccess.BeerLogger;
 import io.reactivex.subjects.BehaviorSubject;
 
 /**
- * Created by user on 06/01/2018.
+ * Created by keith.loughnane@gmail.com on 06/01/2018.
  */
 
 public class NetworkObserver {

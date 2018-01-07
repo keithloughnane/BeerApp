@@ -10,7 +10,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 /**
- * Created by user on 04/01/2018.
+ * Created by keith.loughnane@gmail.com on 04/01/2018.
  */
 
 public class BeerConverter {

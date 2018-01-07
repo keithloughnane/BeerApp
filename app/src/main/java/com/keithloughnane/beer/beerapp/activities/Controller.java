@@ -7,7 +7,7 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 /**
- * Created by user on 04/01/2018.
+ * Created by keith.loughnane@gmail.com on 04/01/2018.
  */
 
 public abstract class Controller {

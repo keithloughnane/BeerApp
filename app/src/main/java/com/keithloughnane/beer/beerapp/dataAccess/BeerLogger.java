@@ -3,7 +3,7 @@ package com.keithloughnane.beer.beerapp.dataAccess;
 import android.util.Log;
 
 /**
- * Created by user on 07/01/2018.
+ * Created by keith.loughnane@gmail.com on 07/01/2018.
  */
 
 public class BeerLogger {

@@ -19,14 +19,9 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.internal.operators.observable.ObservableScan;
 
 /**
- * Created by user on 04/01/2018.
+ * Created by keith.loughnane@gmail.com on 04/01/2018.
  */
 
 abstract class BaseActivityWithAdapter<B, M> extends BaseActivity implements BeerView {
@@ -63,7 +58,7 @@ abstract class BaseActivityWithAdapter<B, M> extends BaseActivity implements Bee
     public void downloadComplete() {
         adapter.notifyDataSetChanged();
         progressBar.setVisibility(View.GONE);
-        
+
         if (model.beers.size() == 0) {
             failure.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);

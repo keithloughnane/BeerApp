@@ -20,7 +20,7 @@ import io.reactivex.subjects.PublishSubject;
 
 
 /**
- * Created by user on 04/01/2018.
+ * Created by keith.loughnane@gmail.com on 04/01/2018.
  */
 
 public class MainActivityController extends ControllerWithAdapter {

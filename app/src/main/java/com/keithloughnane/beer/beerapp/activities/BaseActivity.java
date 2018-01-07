@@ -9,7 +9,7 @@ import com.keithloughnane.beer.beerapp.AppComponent;
 import com.keithloughnane.beer.beerapp.BeerApplication;
 
 /**
- * Created by user on 04/01/2018.
+ * Created by keith.loughnane@gmail.com on 04/01/2018.
  */
 
 public abstract class BaseActivity<M extends BeerModel, C extends Controller> extends AppCompatActivity {

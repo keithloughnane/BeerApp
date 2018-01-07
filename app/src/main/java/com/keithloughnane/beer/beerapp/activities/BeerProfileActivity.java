@@ -20,9 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class BeerProfileActivity extends AppCompatActivity {
-
     public static final String BEER_PARAM = "BEER_PARAM";
-
 
     @BindView(R.id.beer_image)
     ImageView beerImage;
@@ -47,7 +45,6 @@ public class BeerProfileActivity extends AppCompatActivity {
     @BindView(R.id.brewer_tips)
     TextView brewerTips;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,8 +59,6 @@ public class BeerProfileActivity extends AppCompatActivity {
 
         title.setText(beer.name);
         tagLine.setText(beer.tagline);
-        //pairing.setText(beer.food_pairing.get(0)); //TODO KL: Fix!
-        //pairing.setText(Arrays.toString(beer.food_pairing).replaceAll("\\[|\\]", ""));
 
         String pairingText = "";
         for (String s : beer.food_pairing) {
@@ -72,13 +67,12 @@ public class BeerProfileActivity extends AppCompatActivity {
 
         pairing.setText(pairingText);
 
+        abv.setText(getResources().getString(R.string.abv_s, beer.abv));
+        ibu.setText(getResources().getString(R.string.ibu_s, beer.ibu));
+        ebc.setText(getResources().getString(R.string.ebc_s, beer.srm));
+        srm.setText(getResources().getString(R.string.srm_s, beer.srm));
+        ph.setText(getResources().getString(R.string.ph_s, beer.ph));
 
-        abv.setText("" + beer.abv);
-        ibu.setText("" + beer.ibu);
-        ebc.setText("" + beer.ebc);
-        srm.setText("" + beer.srm);
-        ph.setText("" + beer.ph);
         brewerTips.setText(beer.brewers_tips);
-
     }
 }

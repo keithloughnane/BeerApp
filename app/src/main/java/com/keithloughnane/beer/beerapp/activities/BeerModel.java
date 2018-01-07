@@ -5,7 +5,7 @@ import com.keithloughnane.beer.beerapp.data.Beer;
 import java.util.ArrayList;
 
 /**
- * Created by user on 04/01/2018.
+ * Created by keith.loughnane@gmail.com on 04/01/2018.
  */
 
 public class BeerModel {
