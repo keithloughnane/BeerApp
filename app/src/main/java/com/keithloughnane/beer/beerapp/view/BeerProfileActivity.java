@@ -10,6 +10,8 @@ import com.keithloughnane.beer.beerapp.R;
 import com.keithloughnane.beer.beerapp.data.Beer;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -54,12 +56,7 @@ public class BeerProfileActivity extends AppCompatActivity {
         title.setText(beer.name);
         tagLine.setText(beer.tagline);
 
-        String pairingText = "";
-        for (String s : beer.food_pairing) {
-            pairingText += s + "\n";
-        }
-
-        pairing.setText(pairingText);
+        pairing.setText(buildFoodPairingString(beer.food_pairing));
 
         abv.setText(getResources().getString(R.string.abv_s, beer.abv));
         ibu.setText(getResources().getString(R.string.ibu_s, beer.ibu));
@@ -68,5 +65,14 @@ public class BeerProfileActivity extends AppCompatActivity {
         ph.setText(getResources().getString(R.string.ph_s, beer.ph));
 
         brewerTips.setText(beer.brewers_tips);
+    }
+
+    String buildFoodPairingString(ArrayList<String> input) {
+        StringBuilder pairingTextBuilder = new StringBuilder();
+        for (String s : input) {
+            pairingTextBuilder.append(s).append("\n");
+        }
+        String pairingText = pairingTextBuilder.toString();
+        return pairingText.substring(0, pairingText.length() - 1);
     }
 }

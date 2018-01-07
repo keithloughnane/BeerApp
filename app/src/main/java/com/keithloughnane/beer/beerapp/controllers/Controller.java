@@ -12,10 +12,10 @@ import io.reactivex.disposables.Disposable;
 
 public abstract class Controller {
 
-    protected BeerModel model;
-    Disposable subscription;
+    BeerModel model;
+    private Disposable subscription;
 
-    public Controller(BeerModel beerModel){
+    Controller(BeerModel beerModel){
         model = beerModel;
     }
 

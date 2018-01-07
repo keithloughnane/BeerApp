@@ -1,11 +1,10 @@
 package com.keithloughnane.beer.beerapp.dataAccess.local;
 
-import android.util.Log;
 import android.util.Pair;
 
-import com.keithloughnane.beer.beerapp.util.BeerLogger;
 import com.keithloughnane.beer.beerapp.data.Beer;
 import com.keithloughnane.beer.beerapp.dataAccess.remote.BeerApiService;
+import com.keithloughnane.beer.beerapp.util.BeerLogger;
 
 import java.util.List;
 
@@ -20,15 +19,12 @@ import io.reactivex.subjects.BehaviorSubject;
  * Created by keith.loughnane@gmail.com on 04/01/2018.
  */
 
-public class DataAccess { //TODO KL: Better names
-
-    private static final String TAG = "BeerLog";
+public class DataAccess {
     private final Observable<Boolean> networkStatus;
     private final BeerLogger logger;
     private boolean refreshed = false; //TODO, Maybe should be in model
     private BeerApiService remoteApiService;
     private BeerStorage localStorage;
-
     public DataAccess(BeerApiService remoteService, BeerStorage localStorage, Observable<Boolean> networkStatus, BeerLogger logger) {
         this.remoteApiService = remoteService;
         this.localStorage = localStorage;
@@ -37,22 +33,18 @@ public class DataAccess { //TODO KL: Better names
     }
 
     public Observable<List<Beer>> sub(BehaviorSubject<SelectType> selectMode) {
-        Log.d("KLTest", "sub 000");
         return Observable
                 .combineLatest(networkStatus, selectMode, new BiFunction<Boolean, SelectType, Pair<Boolean, SelectType>>() {
-            @Override
-            public Pair<Boolean, SelectType> apply(Boolean networkStatus, SelectType selectMode) throws Exception {
-                Log.d("KLTest", "sub 100");
-                return new Pair<>(networkStatus, selectMode);
-            }
-        })
-                //.startWith(new Pair<Boolean, SelectType>(true, selectMode))
+                    @Override
+                    public Pair<Boolean, SelectType> apply(Boolean networkStatus, SelectType selectMode) throws Exception {
+                        return new Pair<>(networkStatus, selectMode);
+                    }
+                })
                 .flatMap(new Function<Pair<Boolean, SelectType>, Observable<Pair<Boolean, SelectType>>>() {
 
                     @Override
                     public Observable<Pair<Boolean, SelectType>> apply(final Pair<Boolean, SelectType> booleanIntegerPair) throws Exception {
                         if (booleanIntegerPair.first && !refreshed) {
-                            Log.d("KLTest", "sub 200");
                             return remoteApiService.getAllBeers()
                                     .observeOn(Schedulers.io())
                                     .subscribeOn(Schedulers.io())
@@ -83,7 +75,6 @@ public class DataAccess { //TODO KL: Better names
                 .flatMap(new Function<Pair<Boolean, SelectType>, Observable<List<Beer>>>() {
                     @Override
                     public Observable<List<Beer>> apply(Pair<Boolean, SelectType> booleanIntegerPair) throws Exception {
-                        Log.d("KLTest", "sub 500");
                         switch (booleanIntegerPair.second) {
                             case ABV:
                                 return Observable.just(localStorage.getAbvBeer());

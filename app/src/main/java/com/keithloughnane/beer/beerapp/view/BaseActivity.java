@@ -17,8 +17,8 @@ public abstract class BaseActivity<M extends BeerModel, C extends Controller> ex
     M model;
     C controller;
 
-    BaseActivity() {
-
+    private void injectController(AppComponent component) {
+        controller.inject(component);
     }
 
     @Override
@@ -27,15 +27,10 @@ public abstract class BaseActivity<M extends BeerModel, C extends Controller> ex
         AppComponent component = ((BeerApplication) getApplication()).component;
 
         model = createModel();
-
         controller = createController();
 
         injectController(component);
         controller.SetUp();
-    }
-
-    private void injectController(AppComponent component) {
-        controller.inject(component);
     }
 
     protected abstract M createModel();

@@ -16,8 +16,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.functions.Consumer;
 
-public class MainActivity extends BaseActivityWithAdapter<BeerModel, MainActivityController> {
-    //private AppComponent component;
+public class MainActivity extends BaseActivityWithBeerAdapter<BeerModel, MainActivityController> {
 
     @BindView(R.id.abv)
     Button abv;
@@ -31,15 +30,11 @@ public class MainActivity extends BaseActivityWithAdapter<BeerModel, MainActivit
     @BindView(R.id.fav)
     Button favourite;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
         ((BeerApplication) getApplication()).component.inject(this);
         super.onCreate(savedInstanceState);
-
-
-        //component.inject(this);
 
         RxView.clicks(favourite)
                 .doOnNext(new Consumer<Object>() {
