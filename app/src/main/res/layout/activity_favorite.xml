@@ -70,12 +70,13 @@
             android:layout_height="100dp"
             android:layout_gravity="center"/>
 
-        <View
+        <TextView
             android:id="@+id/failureIcon"
             android:visibility="gone"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@drawable/failure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_favs"
+            android:textSize="@dimen/font_size_info"
             android:layout_gravity="center"/>
 
         <android.support.v7.widget.RecyclerView
