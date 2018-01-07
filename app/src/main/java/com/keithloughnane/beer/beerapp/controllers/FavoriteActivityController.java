@@ -13,9 +13,6 @@ import io.reactivex.disposables.Disposables;
 
 public class FavoriteActivityController extends ControllerWithAdapter {
 
-
-
-
     public FavoriteActivityController(BeerModel model) {
         super(model);
     }
@@ -24,39 +21,8 @@ public class FavoriteActivityController extends ControllerWithAdapter {
     protected Disposable setUpSubscriptions() {
         super.setUpSubscriptions();
 
-
-
-        /*
-        dataAccess.getAllBeer()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<Beer>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        Log.d("KLTest", "onSubscribe : " + d);
-                    }
-
-                    @Override
-                    public void onNext(List<Beer> beers) { //TODO KL: Should I be using this
-                        Log.d("KLTest", ":" + beers);
-                        model.beers.addAll(beers);
-                        model.view.downloadComplete();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e("KLTest", "onError: " + e);
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-*/
-
-        selectMode.onNext(DataAccess.SelectType.FAV);
-        networkObserver.sub.onNext(true);
+        //selectMode.onNext(DataAccess.SelectType.FAV);
+        //networkObserver.sub.onNext(true);
 
         return Disposables.empty();
     }

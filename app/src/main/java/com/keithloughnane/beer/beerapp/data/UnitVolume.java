@@ -12,5 +12,5 @@ import java.io.Serializable;
 
 public class UnitVolume implements Serializable {
     public float value;
-    public String unit; //TODO KL: Change to ENUM
+    public String unit;
 }

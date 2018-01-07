@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 @Entity
 @TypeConverters({BeerConverter.class})
-public class Beer implements Serializable {
+public class Beer implements Serializable { //TODO KL: Use JavaStyle names
     @PrimaryKey
     public int id;
     public boolean favorite = false;
@@ -45,7 +45,4 @@ public class Beer implements Serializable {
     public ArrayList<String> food_pairing;
     public String brewers_tips;
     public String contributed_by;
-
-    //@ColumnInfo(name = "item1_id")
-
 }

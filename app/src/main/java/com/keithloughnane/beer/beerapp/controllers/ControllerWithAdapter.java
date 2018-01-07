@@ -33,14 +33,12 @@ public abstract class ControllerWithAdapter extends Controller {
     DataAccess dataAccess; //TODO KL: Move to super
 
     @Inject
-    protected
     NetworkObserver networkObserver;
 
-    public ControllerWithAdapter(BeerModel beerModel) {
+    ControllerWithAdapter(BeerModel beerModel) {
         super(beerModel);
 
-        holderClick
-                //.subscribeOn()
+        holderClick //TODO KL: What is this for?
         .subscribe(new Consumer<Beer>() {
             @Override
             public void accept(Beer beer) throws Exception {
@@ -60,17 +58,14 @@ public abstract class ControllerWithAdapter extends Controller {
     protected Disposable setUpSubscriptions() {
         model.view.downloadStarted();
         dataAccess.sub(selectMode)
-                //.subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<Beer>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        Log.d("KLTest", "onSubscribe : " + d);
                     }
 
                     @Override
                     public void onNext(List<Beer> beers) { //TODO KL: Should I be using this
-                        Log.d("KLTest", "CONTROLLER:" + beers);
                         model.beers.clear();
                         model.beers.addAll(beers);
                         model.view.downloadComplete();

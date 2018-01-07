@@ -22,11 +22,7 @@ public class MainActivityController extends ControllerWithAdapter {
     @Inject
     DataAccess dataAccess;
 
-    //@Inject
-    //NetworkObserver networkObserver;
-
     public PublishSubject<Object> favouriteClick = PublishSubject.create();
-    //PublishSubject<DataAccess.SelectType> selectMode = PublishSubject.create();
 
     public MainActivityController(BeerModel beerMode) {
         super(beerMode);
@@ -35,45 +31,6 @@ public class MainActivityController extends ControllerWithAdapter {
     @Override
     protected Disposable setUpSubscriptions() {
         super.setUpSubscriptions();
-
-        //model.view.downloadStarted();
-        //Log.e("KLTest", "setUpSubscriptions");
-
-        /*
-        dataAccess.sub(selectMode)
-                //.subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<Beer>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        Log.d("KLTest", "onSubscribe : " + d);
-
-                    }
-
-                    @Override
-                    public void onNext(List<Beer> beers) { //TODO KL: Should I be using this
-                        Log.d("KLTest", ":" + beers);
-                        model.beers.clear();
-                        model.beers.addAll(beers);
-                        model.view.downloadComplete();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e("KLTest", "onError: " + e);
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-
-        Log.e("KLTest", "onNext");
-
-        selectMode.onNext(DataAccess.SelectType.ALL);
-        networkObserver.sub.onNext(true);
-*/
 
         favouriteClick
                 //.subscribe();
@@ -84,7 +41,7 @@ public class MainActivityController extends ControllerWithAdapter {
                     }
 
                     @Override
-                    public void onNext(Object view) {
+                    public void onNext(Object view) { //TODO KL: What is this for?
                         //Intent intent = new Intent(this, FavoriteActivity.class);
                         //intent.putExtra(EXTRA_MESSAGE, message);
                     }
