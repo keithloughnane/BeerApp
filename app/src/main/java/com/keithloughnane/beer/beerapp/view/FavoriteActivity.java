@@ -7,7 +7,7 @@ import com.keithloughnane.beer.beerapp.controllers.Controller;
 import com.keithloughnane.beer.beerapp.controllers.FavoriteActivityController;
 import com.keithloughnane.beer.beerapp.models.BeerModel;
 
-public class FavoriteActivity extends BaseActivityWithBeerAdapter {
+public class FavoriteActivity extends BaseActivityWithBeerAdapter<BeerModel, FavoriteActivityController> {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,7 @@ public class FavoriteActivity extends BaseActivityWithBeerAdapter {
     }
 
     @Override
-    protected Controller createController() {
+    protected FavoriteActivityController createController() {
         return new FavoriteActivityController(model);
     }
 }

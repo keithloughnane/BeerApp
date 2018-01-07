@@ -10,8 +10,10 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.keithloughnane.beer.beerapp.R;
+import com.keithloughnane.beer.beerapp.controllers.Controller;
 import com.keithloughnane.beer.beerapp.controllers.ControllerWithAdapter;
 import com.keithloughnane.beer.beerapp.dataAccess.local.DataAccess;
+import com.keithloughnane.beer.beerapp.models.BeerModel;
 
 import javax.inject.Inject;
 
@@ -22,7 +24,7 @@ import butterknife.ButterKnife;
  * Created by keith.loughnane@gmail.com on 04/01/2018.
  */
 
-abstract class BaseActivityWithBeerAdapter<M,C> extends BaseActivity implements BeerView {
+abstract class BaseActivityWithBeerAdapter<M extends BeerModel, C extends ControllerWithAdapter> extends BaseActivity<M, C> implements BeerView {
 
     @Inject
     DataAccess dataAccess;

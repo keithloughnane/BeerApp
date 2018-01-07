@@ -75,7 +75,7 @@ public class MainActivity extends BaseActivityWithBeerAdapter<BeerModel, MainAct
     }
 
     @Override
-    protected Controller createController() {
+    protected MainActivityController createController() {
         return new MainActivityController(model);
     }
 }
