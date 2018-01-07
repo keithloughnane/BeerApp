@@ -3,13 +3,10 @@ package com.keithloughnane.beer.beerapp;
 import android.arch.persistence.room.Room;
 import android.content.Context;
 
-import com.keithloughnane.beer.beerapp.dataAccess.AppDatabaseWrapper;
 import com.keithloughnane.beer.beerapp.dataAccess.BeerLogger;
 import com.keithloughnane.beer.beerapp.dataAccess.DataAccess;
 import com.keithloughnane.beer.beerapp.dataAccess.local.AppDatabase;
 import com.keithloughnane.beer.beerapp.dataAccess.remote.BeerService;
-
-import java.util.logging.Logger;
 
 import javax.inject.Singleton;
 
@@ -55,7 +52,7 @@ public class AppModule {
     @Provides
     @Singleton
     public DataAccess dataAccess(BeerService localAccess, AppDatabase remoteAccess, NetworkObserver networkObserver, BeerLogger logger) {
-        return new DataAccess(localAccess, new AppDatabaseWrapper(remoteAccess), remoteAccess, networkObserver.sub, logger);
+        return new DataAccess(localAccess, remoteAccess.beerStorage(), networkObserver.sub, logger);
     }
 
     @Provides

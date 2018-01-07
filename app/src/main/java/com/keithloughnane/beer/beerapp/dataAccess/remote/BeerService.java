@@ -1,9 +1,7 @@
 package com.keithloughnane.beer.beerapp.dataAccess.remote;
 
 import com.keithloughnane.beer.beerapp.data.Beer;
-import com.keithloughnane.beer.beerapp.dataAccess.DataService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;

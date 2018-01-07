@@ -9,7 +9,7 @@ import io.reactivex.Observable;
 /**
  * Created by user on 06/01/2018.
  */
-
+/* TODO KL: Delete me
 public interface DataService {
     Observable<List<Beer>> getAllBeers();
 
@@ -23,3 +23,4 @@ public interface DataService {
 
     void update(Beer beer);
 }
+*/

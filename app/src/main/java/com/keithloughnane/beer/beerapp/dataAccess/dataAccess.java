@@ -5,6 +5,7 @@ import android.util.Pair;
 
 import com.keithloughnane.beer.beerapp.data.Beer;
 import com.keithloughnane.beer.beerapp.dataAccess.local.AppDatabase;
+import com.keithloughnane.beer.beerapp.dataAccess.local.BeerStorage;
 import com.keithloughnane.beer.beerapp.dataAccess.remote.BeerService;
 
 import java.util.List;
@@ -26,14 +27,12 @@ public class DataAccess { //TODO KL: Better names
     private final BeerLogger logger;
     private boolean refreshed = false; //TODO, Maybe should be in model
     private BeerService remoteService;
-    private DataService localService;
+    private BeerStorage localService;
 
-    public DataAccess(BeerService remoteService, AppDatabaseWrapper localService, final AppDatabase d, Observable<Boolean> networkStatus, BeerLogger logger) {
+    public DataAccess(BeerService remoteService, BeerStorage localService, Observable<Boolean> networkStatus, BeerLogger logger) {
         this.remoteService = remoteService;
         this.localService = localService;
-        //dataService = localService;
         this.logger = logger;
-
         this.networkStatus = networkStatus;
     }
 
@@ -58,7 +57,7 @@ public class DataAccess { //TODO KL: Better names
                                     .flatMap(new Function<List<Beer>, Observable<Pair<Boolean, SelectType>>>() {
                                         @Override
                                         public Observable<Pair<Boolean, SelectType>> apply(List<Beer> beers) throws Exception {
-                                            ((AppDatabaseWrapper) localService).insert(beers);
+                                            localService.insertAll(beers);
                                             refreshed = true;
                                             logger.d("Test");
                                             logger.e("Test");
@@ -86,23 +85,23 @@ public class DataAccess { //TODO KL: Better names
                         Log.d("KLTest", "sub 500");
                         switch (booleanIntegerPair.second) {
                             case ABV:
-                                return localService.getAbvBeer();
+                                return Observable.just(localService.getAbvBeer());
                             case IBU:
-                                return localService.getIbuBeer();
+                                return Observable.just(localService.getIbuBeer());
                             case EBC:
-                                return localService.getEbcBeer();
+                                return Observable.just(localService.getEbcBeer());
                             case FAV:
-                                return localService.getFavBeer();
+                                return Observable.just(localService.getFavBeer());
                             case ALL:
                             default:
-                                return localService.getAllBeers();
+                                return Observable.just(localService.getAllBeers());
                         }
                     }
                 });
     }
 
     public void update(Beer beer) {
-        localService.update(beer);
+        localService.updateBeer(beer.favorite, beer.id);
     }
 
     public enum SelectType {
