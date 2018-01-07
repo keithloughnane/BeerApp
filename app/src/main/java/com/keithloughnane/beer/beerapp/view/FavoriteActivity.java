@@ -15,7 +15,7 @@ public class FavoriteActivity extends BaseActivityWithBeerAdapter<BeerModel, Fav
     }
 
     @Override
-    protected BeerModel createModel() {
+    protected BeerModel createModel() { //TODO KL: Move to Super. Generics should take care of
         BeerModel model = new BeerModel();
         model.view = this;
         return model;

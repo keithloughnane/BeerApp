@@ -11,5 +11,5 @@ import java.util.ArrayList;
 
 public class BeerModel {
     public BeerView view;
-    public ArrayList<Beer> beers = new ArrayList<>();
+    public final ArrayList<Beer> beers = new ArrayList<>();
 }

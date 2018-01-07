@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class BeerProfileActivity extends AppCompatActivity {
+public class BeerProfileActivity extends AppCompatActivity { //TODO KL: Should use BaseActivity?
     public static final String BEER_PARAM = "BEER_PARAM";
 
     @BindView(R.id.beer_image)

@@ -13,7 +13,7 @@ import io.reactivex.subjects.BehaviorSubject;
  */
 
 public class NetworkObserver {
-    public BehaviorSubject<Boolean> sub = BehaviorSubject.create().create();
+    public final BehaviorSubject<Boolean> sub = BehaviorSubject.create();
 
     public NetworkObserver(Context context, final BeerLogger logger) {
         final IntentFilter netIntentFilter = new IntentFilter();

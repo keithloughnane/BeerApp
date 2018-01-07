@@ -1,5 +1,6 @@
 package com.keithloughnane.beer.beerapp.view;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -35,11 +36,8 @@ abstract class BaseActivityWithBeerAdapter<M extends BeerModel, C extends Contro
     View failure;
     private Adapter adapter;
 
-    BaseActivityWithBeerAdapter() {
-        super();
-    }
-
     class Adapter extends RecyclerView.Adapter<BeerViewHolder> {
+        @SuppressLint("InflateParams")
         @Override
         public BeerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             return new BeerViewHolder(LayoutInflater.from(getBaseContext()).inflate(R.layout.beer_view_holder, null), controller); //TODO KL: Refactor to avoid cast

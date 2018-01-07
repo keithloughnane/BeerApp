@@ -24,7 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class AppModule {
-    private Context context;
+    private final Context context;
 
     public AppModule(Context context) {
         this.context = context;

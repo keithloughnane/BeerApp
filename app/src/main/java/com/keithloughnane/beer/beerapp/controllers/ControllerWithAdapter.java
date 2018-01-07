@@ -24,9 +24,9 @@ import io.reactivex.subjects.PublishSubject;
  */
 
 public abstract class ControllerWithAdapter extends Controller {
-    public PublishSubject<Beer> holderClick = PublishSubject.create();
-    public PublishSubject<Beer> favoriteClick = PublishSubject.create();
-    public BehaviorSubject<DataAccess.SelectType> selectMode = BehaviorSubject.create().create();
+    public final PublishSubject<Beer> holderClick = PublishSubject.create();
+    public final PublishSubject<Beer> favoriteClick = PublishSubject.create();
+    public final BehaviorSubject<DataAccess.SelectType> selectMode = BehaviorSubject.create();
 
     @Inject
     public
@@ -81,6 +81,9 @@ public abstract class ControllerWithAdapter extends Controller {
 
                     }
                 });
+
+        selectMode.onNext(DataAccess.SelectType.ALL);
+        networkObserver.sub.onNext(true);
 
         return Disposables.empty();
     }

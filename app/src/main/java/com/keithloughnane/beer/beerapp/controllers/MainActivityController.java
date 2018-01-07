@@ -5,6 +5,7 @@ import android.util.Log;
 import com.keithloughnane.beer.beerapp.dependencyInjection.AppComponent;
 import com.keithloughnane.beer.beerapp.models.BeerModel;
 import com.keithloughnane.beer.beerapp.dataAccess.local.DataAccess;
+import com.keithloughnane.beer.beerapp.util.NetworkObserver;
 
 import javax.inject.Inject;
 
@@ -20,9 +21,12 @@ import io.reactivex.subjects.PublishSubject;
 
 public class MainActivityController extends ControllerWithAdapter {
     @Inject
-    DataAccess dataAccess;
+    DataAccess dataAccess; //TODO KL: Move to super
 
-    public PublishSubject<Object> favouriteClick = PublishSubject.create();
+    //@Inject
+    //NetworkObserver networkObserver;
+
+    public final PublishSubject<Object> favouriteClick = PublishSubject.create();
 
     public MainActivityController(BeerModel beerMode) {
         super(beerMode);
@@ -56,9 +60,6 @@ public class MainActivityController extends ControllerWithAdapter {
 
                     }
                 });
-
-        selectMode.onNext(DataAccess.SelectType.ALL);
-        networkObserver.sub.onNext(true);
 
         return Disposables.empty();
     }

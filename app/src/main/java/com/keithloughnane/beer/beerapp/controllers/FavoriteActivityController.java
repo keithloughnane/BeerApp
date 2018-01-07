@@ -2,7 +2,6 @@ package com.keithloughnane.beer.beerapp.controllers;
 
 import com.keithloughnane.beer.beerapp.dependencyInjection.AppComponent;
 import com.keithloughnane.beer.beerapp.models.BeerModel;
-import com.keithloughnane.beer.beerapp.dataAccess.local.DataAccess;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.disposables.Disposables;

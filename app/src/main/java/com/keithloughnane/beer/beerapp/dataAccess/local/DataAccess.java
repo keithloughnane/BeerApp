@@ -23,8 +23,8 @@ public class DataAccess {
     private final Observable<Boolean> networkStatus;
     private final BeerLogger logger;
     private boolean refreshed = false; //TODO, Maybe should be in model
-    private BeerApiService remoteApiService;
-    private BeerStorage localStorage;
+    private final BeerApiService remoteApiService;
+    private final BeerStorage localStorage;
     public DataAccess(BeerApiService remoteService, BeerStorage localStorage, Observable<Boolean> networkStatus, BeerLogger logger) {
         this.remoteApiService = remoteService;
         this.localStorage = localStorage;
@@ -97,6 +97,6 @@ public class DataAccess {
     }
 
     public enum SelectType {
-        ABV, IBU, EBC, FAV, ALL;
+        ABV, IBU, EBC, FAV, ALL
     }
 }

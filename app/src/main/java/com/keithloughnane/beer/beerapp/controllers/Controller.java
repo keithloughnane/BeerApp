@@ -12,8 +12,8 @@ import io.reactivex.disposables.Disposable;
 
 public abstract class Controller {
 
-    BeerModel model;
-    private Disposable subscription;
+    final BeerModel model;
+    private Disposable subscription; //TODO KL: Use me
 
     Controller(BeerModel beerModel){
         model = beerModel;
