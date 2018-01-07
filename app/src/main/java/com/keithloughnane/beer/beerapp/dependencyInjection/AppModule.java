@@ -3,10 +3,11 @@ package com.keithloughnane.beer.beerapp.dependencyInjection;
 import android.arch.persistence.room.Room;
 import android.content.Context;
 
+import com.keithloughnane.beer.beerapp.R;
 import com.keithloughnane.beer.beerapp.util.BeerLogger;
 import com.keithloughnane.beer.beerapp.util.NetworkObserver;
 import com.keithloughnane.beer.beerapp.dataAccess.local.DataAccess;
-import com.keithloughnane.beer.beerapp.dataAccess.local.AppDatabase;
+import com.keithloughnane.beer.beerapp.dataAccess.local.BeerDatabase;
 import com.keithloughnane.beer.beerapp.dataAccess.remote.BeerApiService;
 
 import javax.inject.Singleton;
@@ -23,53 +24,51 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class AppModule {
-    Context context;
+    private Context context;
 
     public AppModule(Context context) {
         this.context = context;
     }
 
     @Provides
+    Context providesContext() {
+        return context;
+    }
+
+    @Provides
     @Singleton
     BeerApiService remoteData() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.punkapi.com/v2/")
+                .baseUrl(context.getString(R.string.api_url))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        BeerApiService service = retrofit.create(BeerApiService.class);
-
-        return service;
+        return retrofit.create(BeerApiService.class);
     }
 
     @Provides
     @Singleton
-    public AppDatabase localData(Context context) {
+    BeerDatabase providesAppDatabase(Context context) {
         return Room.databaseBuilder(context,
-                AppDatabase.class, "beer").build();
+                BeerDatabase.class, "beer").build();
     }
 
     @Provides
     @Singleton
-    public DataAccess dataAccess(BeerApiService localAccess, AppDatabase remoteAccess, NetworkObserver networkObserver, BeerLogger logger) {
+    DataAccess providesDataAccess(BeerApiService localAccess, BeerDatabase remoteAccess, NetworkObserver networkObserver, BeerLogger logger) {
         return new DataAccess(localAccess, remoteAccess.beerStorage(), networkObserver.sub, logger);
     }
 
     @Provides
     @Singleton
-    public BeerLogger providesLogger() {
+    BeerLogger providesLogger() {
         return new BeerLogger();
     }
 
     @Provides
     @Singleton
-    public NetworkObserver providesNetworkObserver(Context context, BeerLogger logger) {
+    NetworkObserver providesNetworkObserver(Context context, BeerLogger logger) {
         return new NetworkObserver(context, logger);
-    }
-
-    @Provides
-    public Context context() {
-        return context;
     }
 }

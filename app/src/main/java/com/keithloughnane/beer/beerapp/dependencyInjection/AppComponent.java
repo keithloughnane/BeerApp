@@ -12,7 +12,6 @@ import dagger.Component;
  * Created by keith.loughnane@gmail.com on 03/01/2018.
  */
 
-
 @Singleton
 @Component(modules = AppModule.class)
 public interface AppComponent {

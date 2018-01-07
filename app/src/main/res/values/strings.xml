@@ -16,4 +16,5 @@
     <string name="ebc_s">EBC %s</string>
     <string name="srm_s">SRM %s</string>
     <string name="ph_s">PH %s</string>
+    <string name="api_url">https://api.punkapi.com/v2/</string>
 </resources>
