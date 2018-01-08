@@ -33,7 +33,7 @@
             android:textStyle="bold"
             android:text="@string/favorites"
             android:textAlignment="textEnd"
-            android:textColor="@color/black"
+            android:textColor="@color/font_header_black"
             android:textSize="50sp"
             tools:ignore="RtlSymmetry" />
 
@@ -47,7 +47,7 @@
             android:paddingEnd="10dp"
             android:text="@string/favorites_subtitle"
             android:textAlignment="textEnd"
-            android:textColor="@color/black"
+            android:textColor="@color/font_header_black"
 
             android:textSize="12dp"
             tools:ignore="RtlSymmetry,SpUsage" />
@@ -56,7 +56,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/black"/>
+        android:background="@color/font_header_black"/>
 
 
     <FrameLayout
