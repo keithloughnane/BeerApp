@@ -56,11 +56,11 @@ public class Beer implements Serializable { //TODO KL: Use JavaStyle names
     public ArrayList<String> foodPairing;
 
     @Embedded(prefix = "volume")
-    public UnitVolume volume;
+    public UnitAmount volume;
 
     @Embedded(prefix = "boil")
     @SerializedName("boil_volume")
-    public UnitVolume boilVolume;
+    public UnitAmount boilVolume;
 
     @Embedded(prefix = "method")
     public Method method;

@@ -8,5 +8,5 @@ import java.io.Serializable;
 
 public class Ingredient implements Serializable {
     String name;
-    UnitVolume amount;
+    UnitAmount amount;
 }
