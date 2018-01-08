@@ -4,8 +4,6 @@ import com.keithloughnane.beer.beerapp.dataAccess.local.DataAccess;
 import com.keithloughnane.beer.beerapp.dependencyInjection.AppComponent;
 import com.keithloughnane.beer.beerapp.models.BeerModel;
 
-import javax.inject.Inject;
-
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subjects.PublishSubject;
 

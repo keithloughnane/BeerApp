@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import com.keithloughnane.beer.beerapp.R;
 import com.keithloughnane.beer.beerapp.controllers.FavoriteActivityController;
-import com.keithloughnane.beer.beerapp.models.BeerModel;
 
 public class FavoriteActivity extends BaseActivityWithBeerAdapter<FavoriteActivityController> {
 

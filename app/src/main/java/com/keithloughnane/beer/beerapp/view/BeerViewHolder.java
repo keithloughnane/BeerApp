@@ -60,7 +60,7 @@ public class BeerViewHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, itemView);
     }
 
-    public void bind(final Beer beer) {
+    public void bind(final Beer beer) { //TODO KL: Deal with subs
         title.setText(beer.name);
         tagLine.setText(beer.tagline);
 
