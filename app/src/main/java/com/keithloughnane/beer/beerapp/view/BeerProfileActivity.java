@@ -50,13 +50,13 @@ public class BeerProfileActivity extends AppCompatActivity { //TODO KL: Should u
         Beer beer = (Beer) getIntent().getSerializableExtra(BEER_PARAM);
 
         Picasso.with(this)
-                .load(beer.image_url)
+                .load(beer.imageUrl)
                 .into(beerImage);
 
         title.setText(beer.name);
         tagLine.setText(beer.tagline);
 
-        pairing.setText(buildFoodPairingString(beer.food_pairing));
+        pairing.setText(buildFoodPairingString(beer.foodPairing));
 
         abv.setText(getResources().getString(R.string.abv_s, beer.abv));
         ibu.setText(getResources().getString(R.string.ibu_s, beer.ibu));
@@ -64,7 +64,7 @@ public class BeerProfileActivity extends AppCompatActivity { //TODO KL: Should u
         srm.setText(getResources().getString(R.string.srm_s, beer.srm));
         ph.setText(getResources().getString(R.string.ph_s, beer.ph));
 
-        brewerTips.setText(beer.brewers_tips);
+        brewerTips.setText(beer.brewersTips);
     }
 
     String buildFoodPairingString(ArrayList<String> input) {

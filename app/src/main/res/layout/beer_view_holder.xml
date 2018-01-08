@@ -34,7 +34,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:id="@+id/favorite"
-        android:background="@drawable/favourite_unchecked"
+        android:background="@drawable/favorite_unchecked"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:paddingEnd="8dp"

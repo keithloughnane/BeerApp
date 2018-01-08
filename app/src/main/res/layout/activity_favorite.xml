@@ -16,7 +16,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignParentStart="true"
-            android:background="@drawable/favourite_checked"
+            android:background="@drawable/favorite_checked"
             android:scaleType="centerInside"
             android:paddingEnd="5dp"
             android:paddingStart="5dp"

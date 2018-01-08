@@ -9,7 +9,6 @@ import com.keithloughnane.beer.beerapp.BeerApplication;
 import com.keithloughnane.beer.beerapp.R;
 import com.keithloughnane.beer.beerapp.controllers.MainActivityController;
 import com.keithloughnane.beer.beerapp.dataAccess.local.DataAccess;
-import com.keithloughnane.beer.beerapp.models.BeerModel;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -27,7 +26,7 @@ public class MainActivity extends BaseActivityWithBeerAdapter<MainActivityContro
     Button ebc;
 
     @BindView(R.id.fav)
-    Button favourite;
+    Button favorite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +34,7 @@ public class MainActivity extends BaseActivityWithBeerAdapter<MainActivityContro
         ((BeerApplication) getApplication()).component.inject(this);
         super.onCreate(savedInstanceState);
 
-        RxView.clicks(favourite)
+        RxView.clicks(favorite)
                 .doOnNext(new Consumer<Object>() {
                     @Override
                     public void accept(Object o) throws Exception {
@@ -46,7 +45,7 @@ public class MainActivity extends BaseActivityWithBeerAdapter<MainActivityContro
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(Object o) throws Exception {
-                        controller.favouriteClick.onNext(o); //TODO KL: Need whole object?
+                        controller.favoriteClick.onNext(o); //TODO KL: Need whole object?
                     }
                 });
     }

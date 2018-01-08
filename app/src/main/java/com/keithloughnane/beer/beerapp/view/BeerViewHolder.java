@@ -73,7 +73,7 @@ public class BeerViewHolder extends RecyclerView.ViewHolder {
 
         Picasso
                 .with(itemView.getContext())
-                .load(beer.image_url)
+                .load(beer.imageUrl)
                 .fit()
                 .centerInside()
                 .into(beerImage);
@@ -117,6 +117,6 @@ public class BeerViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void setFavoriteIcon(Beer beer) {
-        favorite.setBackground(getDrawable(itemView.getContext(), beer.favorite ? R.drawable.favourite_checked : R.drawable.favourite_unchecked));
+        favorite.setBackground(getDrawable(itemView.getContext(), beer.favorite ? R.drawable.favorite_checked : R.drawable.favorite_unchecked));
     }
 }

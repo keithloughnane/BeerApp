@@ -17,10 +17,7 @@ import io.reactivex.subjects.PublishSubject;
 public class MainActivityController extends ControllerWithAdapter {
     private static final DataAccess.SelectType DEFAULT_SELECT_TYPE = DataAccess.SelectType.ALL;
 
-    @Inject
-    DataAccess dataAccess; //TODO KL: Move to super
-
-    public final PublishSubject<Object> favouriteClick = PublishSubject.create();
+    public final PublishSubject<Object> favoriteClick = PublishSubject.create();
 
     public MainActivityController(BeerModel beerMode) {
         super(beerMode);
