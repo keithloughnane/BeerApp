@@ -12,8 +12,6 @@ import java.util.ArrayList;
  */
 
 public class Method implements Serializable {
-    //TODO KL:
-    @Embedded(prefix = "mash_temp")
     @SerializedName("mash_temp")
     public ArrayList<MethodStep> mashTemp;
 

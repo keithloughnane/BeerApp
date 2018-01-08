@@ -3,8 +3,8 @@
     <dimen name="font_size_info">20sp</dimen>
     <dimen name="font_size_title">50sp</dimen>
     <dimen name="font_size_subtitle">50sp</dimen>
-    <dimen name="font_size_details_title">30dp</dimen>
-    <dimen name="font_size_details_subtitle">15dp</dimen>
-    <dimen name="font_size_small">10dp</dimen>
-    <dimen name="detail_bar_size">25dp</dimen>
+    <dimen name="font_size_details_title">30sp</dimen>
+    <dimen name="font_size_details_subtitle">15sp</dimen>
+    <dimen name="font_size_small">12sp</dimen>
+    <dimen name="detail_bar_size">25sp</dimen>
 </resources>

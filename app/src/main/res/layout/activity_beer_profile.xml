@@ -10,44 +10,49 @@
         android:layout_width="150dp"
         android:layout_height="200dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"/>
+        android:layout_alignParentTop="true"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp"
+        android:paddingTop="8dp" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_toEndOf="@id/beer_image"
+        android:textAlignment="viewEnd"
         android:textSize="@dimen/font_size_details_title"
-        tools:text="Long title beer beer beer"
-        android:textAlignment="textEnd"
-        android:layout_toEndOf="@id/beer_image"/>
+        tools:text="Long title beer beer beer" />
 
     <TextView
         android:id="@+id/tag_line"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/title"
+        android:layout_toEndOf="@id/beer_image"
+        android:textAlignment="viewEnd"
         android:textSize="@dimen/font_size_details_subtitle"
-        tools:text="A very beery beer with beer flavor"
-        android:textAlignment="textEnd"
-        android:layout_toEndOf="@id/beer_image"/>
+        tools:text="A very beery beer with beer flavor" />
 
     <TextView
         android:id="@+id/pairing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/details_bar"
         android:layout_below="@+id/tag_line"
+        android:layout_toEndOf="@id/beer_image"
+        android:gravity="center_vertical"
         android:textSize="@dimen/font_size_small"
-        tools:text="Food1\nFood2 \nFood3"
-        android:layout_toEndOf="@id/beer_image"/>
+        tools:text="Food1\nFood2 \nFood3" />
 
     <LinearLayout
         android:id="@+id/details_bar"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/detail_bar_size"
-        android:layout_below="@+id/beer_image"
-        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/beer_image"
         android:layout_toEndOf="@+id/beer_image"
         android:background="@drawable/blue_bar"
         android:orientation="horizontal">
@@ -88,18 +93,18 @@
             android:padding="5dp" />
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/extra_details"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/method_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/details_bar"
-        android:layout_height="30dp">
-
-    </android.support.v7.widget.RecyclerView>
+        android:padding="20dp" />
 
     <TextView
         android:id="@+id/brewer_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:padding="20dp" />
 </RelativeLayout>

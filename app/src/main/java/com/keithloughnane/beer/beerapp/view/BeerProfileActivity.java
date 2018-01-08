@@ -2,12 +2,12 @@ package com.keithloughnane.beer.beerapp.view;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.keithloughnane.beer.beerapp.R;
 import com.keithloughnane.beer.beerapp.data.Beer;
+import com.keithloughnane.beer.beerapp.data.Ingredient;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -36,10 +36,10 @@ public class BeerProfileActivity extends AppCompatActivity { //TODO KL: Should u
     TextView srm;
     @BindView(R.id.ph)
     TextView ph;
-    @BindView(R.id.extra_details)
-    RecyclerView extraDetails;
     @BindView(R.id.brewer_tips)
     TextView brewerTips;
+    @BindView(R.id.method_info)
+    TextView methodInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,10 +64,33 @@ public class BeerProfileActivity extends AppCompatActivity { //TODO KL: Should u
         srm.setText(getResources().getString(R.string.srm_s, beer.srm));
         ph.setText(getResources().getString(R.string.ph_s, beer.ph));
 
+
         brewerTips.setText(beer.brewersTips);
+        methodInfo.setText(buildInfo(beer));
     }
 
-    String buildFoodPairingString(ArrayList<String> input) {
+    private String buildInfo(Beer beer) {
+        StringBuilder buildMethod = new StringBuilder();
+
+        buildMethod.append(getResources().getString(R.string.ingredients)).append('\n');
+        buildMethod.append(getResources().getString(R.string.hops)).append('\n');
+
+        for (Ingredient h : beer.ingredients.hops) {
+            buildMethod.append(getResources().getString(R.string.ingredient_amount_unit_name, h.amount.value, h.amount.unit, h.name));
+        }
+
+        buildMethod.append(getResources().getString(R.string.malt)).append('\n');
+        for (Ingredient h : beer.ingredients.malt) {
+            buildMethod.append(getResources().getString(R.string.ingredient_amount_unit_name, h.amount.value, h.amount.unit, h.name));
+        }
+
+        buildMethod.append(getResources().getString(R.string.yeast)).append('\n');
+        buildMethod.append(beer.ingredients.yeast).append('\n');
+
+        return buildMethod.toString();
+    }
+
+    private String buildFoodPairingString(ArrayList<String> input) {
         StringBuilder pairingTextBuilder = new StringBuilder();
         for (String s : input) {
             pairingTextBuilder.append(s).append("\n");

@@ -7,6 +7,6 @@ import java.io.Serializable;
  */
 
 public class Ingredient implements Serializable {
-    String name;
-    UnitAmount amount;
+    public String name;
+    public UnitAmount amount;
 }

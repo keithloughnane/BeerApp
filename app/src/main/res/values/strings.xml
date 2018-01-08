@@ -17,4 +17,12 @@
     <string name="srm_s">SRM %s</string>
     <string name="ph_s">PH %s</string>
     <string name="api_url">https://api.punkapi.com/v2/</string>
+    <string name="fermentation">Fermentation</string>
+    <string name="mash_temp">Mash temperature</string>
+    <string name="mash_details">Cook mash at %s %s for %s</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="ingredient_amount_unit_name">%s %s of %s\n</string>
+    <string name="malt">Malt</string>
+    <string name="hops">Hops</string>
+    <string name="yeast">Yeast</string>
 </resources>
