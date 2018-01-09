@@ -5,11 +5,11 @@ import android.content.Context;
 
 import com.keithloughnane.beer.beerapp.R;
 import com.keithloughnane.beer.beerapp.UIManager;
+import com.keithloughnane.beer.beerapp.dataAccess.local.BeerDatabase;
+import com.keithloughnane.beer.beerapp.dataAccess.local.DataAccess;
+import com.keithloughnane.beer.beerapp.dataAccess.remote.BeerApiService;
 import com.keithloughnane.beer.beerapp.util.BeerLogger;
 import com.keithloughnane.beer.beerapp.util.NetworkObserver;
-import com.keithloughnane.beer.beerapp.dataAccess.local.DataAccess;
-import com.keithloughnane.beer.beerapp.dataAccess.local.BeerDatabase;
-import com.keithloughnane.beer.beerapp.dataAccess.remote.BeerApiService;
 
 import javax.inject.Singleton;
 

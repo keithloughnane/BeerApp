@@ -7,8 +7,6 @@ import com.keithloughnane.beer.beerapp.data.Beer;
 import com.keithloughnane.beer.beerapp.view.BeerProfileActivity;
 import com.keithloughnane.beer.beerapp.view.FavoriteActivity;
 
-import static android.support.v4.content.ContextCompat.startActivity;
-
 /**
  * Created by keith.loughnane@gmail.com on 09/01/2018.
  */
