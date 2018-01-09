@@ -42,7 +42,6 @@ public abstract class ListViewController extends Controller {
 
     @Override
     protected Disposable setUpSubscriptions() {
-        model.view.downloadStarted();
         return new CompositeDisposable(
                 setUpDataSubscriptions(),
                 holderClick
@@ -68,6 +67,7 @@ public abstract class ListViewController extends Controller {
     }
 
     private Disposable setUpDataSubscriptions() {
+        model.view.downloadStarted();
         return dataAccess.sub(selectMode)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<Beer>>() {

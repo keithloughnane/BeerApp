@@ -77,6 +77,7 @@ class BeerViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void setUpClicks(final Beer beer, final ListViewController controller) {
+        //https://github.com/JakeWharton/RxBinding/issues/282
         RxView.clicks(favorite)
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext(new Consumer<Object>() {
@@ -100,12 +101,6 @@ class BeerViewHolder extends RecyclerView.ViewHolder {
                     @Override
                     public Beer apply(Object o) throws Exception {
                         return beer;
-                    }
-                })
-                .doOnNext(new Consumer<Beer>() {
-                    @Override
-                    public void accept(Beer beer) throws Exception { //TODO KL: Move this
-
                     }
                 })
                 .subscribe(controller.holderClick);
