@@ -15,9 +15,13 @@ public abstract class Controller {
     final BeerModel model;
     private Disposable subscription;
 
-    Controller(BeerModel beerModel){
+    Controller(BeerModel beerModel) {
         model = beerModel;
     }
+
+    public abstract void inject(AppComponent component);
+
+    protected abstract Disposable setUpSubscriptions();
 
     public void setUp() {
         subscription = setUpSubscriptions();
@@ -26,7 +30,4 @@ public abstract class Controller {
     public void dispose() {
         subscription.dispose();
     }
-
-    protected abstract Disposable setUpSubscriptions();
-    public abstract void inject(AppComponent component);
 }

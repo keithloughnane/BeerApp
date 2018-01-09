@@ -23,8 +23,9 @@ public class MainActivityController extends ControllerWithAdapter {
 
     @Override
     protected Disposable setUpSubscriptions() {
+        Disposable superDisposable = super.setUpSubscriptions();
         selectMode.onNext(DEFAULT_SELECT_TYPE);
-        return super.setUpSubscriptions();
+        return superDisposable;
     }
 
     @Override

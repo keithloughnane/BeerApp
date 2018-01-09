@@ -27,7 +27,7 @@ import static android.support.v4.content.ContextCompat.startActivity;
  * Created by keith.loughnane@gmail.com on 04/01/2018.
  */
 
-public class BeerViewHolder extends RecyclerView.ViewHolder {
+class BeerViewHolder extends RecyclerView.ViewHolder {
     private final ControllerWithAdapter controller;
 
     @BindView(R.id.title)
@@ -54,13 +54,13 @@ public class BeerViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.favorite)
     ImageButton favorite;
 
-    public BeerViewHolder(View itemView, ControllerWithAdapter controller) {
+    BeerViewHolder(View itemView, ControllerWithAdapter controller) {
         super(itemView);
         this.controller = controller;
         ButterKnife.bind(this, itemView);
     }
 
-    public void bind(final Beer beer) { //TODO KL: Deal with subs
+    void bind(final Beer beer) { //TODO KL: Deal with subs
         title.setText(beer.name);
         tagLine.setText(beer.tagline);
 
@@ -80,6 +80,7 @@ public class BeerViewHolder extends RecyclerView.ViewHolder {
 
         setFavoriteIcon(beer);
 
+        //TODO KL: Organise a bit
         RxView.clicks(favorite)
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext(new Consumer<Object>() {

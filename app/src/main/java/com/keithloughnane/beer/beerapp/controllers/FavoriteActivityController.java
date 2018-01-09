@@ -7,7 +7,7 @@ import com.keithloughnane.beer.beerapp.models.BeerModel;
 import io.reactivex.disposables.Disposable;
 
 /**
- * Created by user on 06/01/2018.
+ * Created by keith.loughnane@gmail.com on 06/01/2018.
  */
 
 public class FavoriteActivityController extends ControllerWithAdapter {
@@ -17,13 +17,14 @@ public class FavoriteActivityController extends ControllerWithAdapter {
     }
 
     @Override
-    protected Disposable setUpSubscriptions() {
-        selectMode.onNext(DataAccess.SelectType.FAV);
-        return super.setUpSubscriptions();
+    public void inject(AppComponent component) {
+        component.inject(this);
     }
 
     @Override
-    public void inject(AppComponent component) {
-        component.inject(this);
+    protected Disposable setUpSubscriptions() {
+        Disposable superDisposable = super.setUpSubscriptions();
+        selectMode.onNext(DataAccess.SelectType.FAV);
+        return superDisposable;
     }
 }

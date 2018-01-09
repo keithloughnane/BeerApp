@@ -57,10 +57,10 @@ abstract class BaseActivityWithBeerAdapter<C extends ControllerWithAdapter> exte
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         ButterKnife.bind(this);
+        super.onCreate(savedInstanceState);
         adapter = new Adapter();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
-        super.onCreate(savedInstanceState);
     }
 
     @Override
