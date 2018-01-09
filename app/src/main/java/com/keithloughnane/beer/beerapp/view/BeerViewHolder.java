@@ -1,6 +1,5 @@
 package com.keithloughnane.beer.beerapp.view;
 
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
@@ -21,7 +20,6 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 import static android.support.v4.content.ContextCompat.getDrawable;
-import static android.support.v4.content.ContextCompat.startActivity;
 
 /**
  * Created by keith.loughnane@gmail.com on 04/01/2018.
@@ -95,7 +93,7 @@ class BeerViewHolder extends RecyclerView.ViewHolder {
                     }
                 })
                 .observeOn(Schedulers.io())
-                .subscribe(controller.favoriteClick);
+                .subscribe(controller.favoriteSelect);
 
         RxView.clicks(itemView)
                 .map(new Function<Object, Beer>() {
@@ -106,10 +104,8 @@ class BeerViewHolder extends RecyclerView.ViewHolder {
                 })
                 .doOnNext(new Consumer<Beer>() {
                     @Override
-                    public void accept(Beer beer) throws Exception {
-                        Intent intent = new Intent(itemView.getContext(), BeerProfileActivity.class);
-                        intent.putExtra(BeerProfileActivity.BEER_PARAM, beer);
-                        startActivity(itemView.getContext(), intent, null);
+                    public void accept(Beer beer) throws Exception { //TODO KL: Move this
+
                     }
                 })
                 .subscribe(controller.holderClick);

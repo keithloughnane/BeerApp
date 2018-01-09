@@ -4,6 +4,7 @@ import android.arch.persistence.room.Room;
 import android.content.Context;
 
 import com.keithloughnane.beer.beerapp.R;
+import com.keithloughnane.beer.beerapp.UIManager;
 import com.keithloughnane.beer.beerapp.util.BeerLogger;
 import com.keithloughnane.beer.beerapp.util.NetworkObserver;
 import com.keithloughnane.beer.beerapp.dataAccess.local.DataAccess;
@@ -70,5 +71,11 @@ public class AppModule {
     @Singleton
     NetworkObserver providesNetworkObserver(Context context, BeerLogger logger) {
         return new NetworkObserver(context, logger);
+    }
+
+    @Provides
+    @Singleton
+    UIManager providesUIManager(Context context) {
+        return new UIManager(context);
     }
 }

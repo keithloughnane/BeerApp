@@ -1,6 +1,5 @@
 package com.keithloughnane.beer.beerapp.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -12,7 +11,6 @@ import com.keithloughnane.beer.beerapp.dataAccess.local.DataAccess;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.reactivex.functions.Consumer;
 
 public class MainActivity extends BaseListViewActivity<MainActivityController> {
 
@@ -34,15 +32,7 @@ public class MainActivity extends BaseListViewActivity<MainActivityController> {
         ((BeerApplication) getApplication()).component.inject(this);
         super.onCreate(savedInstanceState);
 
-        RxView.clicks(favorite)
-                .doOnNext(new Consumer<Object>() {
-                    @Override
-                    public void accept(Object notUsed) throws Exception {
-                        Intent intent = new Intent(getApplicationContext(), FavoriteActivity.class);
-                        startActivity(intent);
-                    }
-                })
-                .subscribe(controller.favoriteClick);
+        RxView.clicks(favorite).subscribe(controller.favoriteNavigate);
     }
 
     @OnClick(R.id.abv)

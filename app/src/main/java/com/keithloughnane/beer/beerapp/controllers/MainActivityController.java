@@ -15,8 +15,6 @@ import io.reactivex.subjects.PublishSubject;
 public class MainActivityController extends ListViewController {
     private static final DataAccess.SelectType DEFAULT_SELECT_TYPE = DataAccess.SelectType.ALL;
 
-    public final PublishSubject<Object> favoriteClick = PublishSubject.create();
-
     public MainActivityController(BeerModel beerMode) {
         super(beerMode);
     }
