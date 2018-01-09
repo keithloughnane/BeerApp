@@ -17,9 +17,10 @@
             android:layout_height="100dp"
             android:layout_alignParentStart="true"
             android:background="@drawable/logo"
-            android:scaleType="fitCenter"
             android:paddingEnd="20dp"
-            android:paddingStart="5dp" />
+            android:paddingStart="5dp"
+            android:scaleType="fitCenter"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/title"
@@ -60,43 +61,47 @@
 
         <Button
             android:id="@+id/abv"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/font_bar_white"
-   android:background="@android:color/transparent"
             android:layout_weight="1"
+            android:background="@android:color/transparent"
             android:padding="10dp"
-            android:text="@string/abv" />
+            android:text="@string/abv"
+            android:textColor="@color/font_bar_white" />
 
         <Button
             android:id="@+id/ibu"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/font_bar_white"
-            android:background="@android:color/transparent"
             android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:text="@string/ibu"
 
-            android:text="@string/ibu" />
+            android:textColor="@color/font_bar_white" />
 
         <Button
             android:id="@+id/ebc"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/font_bar_white"
-            android:background="@android:color/transparent"
             android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:text="@string/ebc"
 
-            android:text="@string/ebc" />
+            android:textColor="@color/font_bar_white" />
 
         <Button
             android:id="@+id/fav"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/font_bar_white"
-            android:background="@android:color/transparent"
             android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:text="@string/fav"
 
-            android:text="@string/fav" />
+            android:textColor="@color/font_bar_white" />
     </LinearLayout>
 
     <FrameLayout
@@ -108,22 +113,22 @@
             android:id="@+id/progress"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center" />
 
         <View
             android:id="@+id/failureIcon"
-            android:visibility="gone"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:layout_gravity="center"
             android:background="@drawable/failure"
-            android:layout_gravity="center"/>
+            android:visibility="gone" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/content_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="invisible"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/content_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp" />
     </FrameLayout>
 </LinearLayout>
