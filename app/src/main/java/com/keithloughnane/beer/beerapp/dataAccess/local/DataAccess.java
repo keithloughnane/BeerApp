@@ -22,9 +22,10 @@ import io.reactivex.subjects.BehaviorSubject;
 public class DataAccess {
     private final Observable<Boolean> networkStatus;
     private final BeerLogger logger;
-    private boolean refreshed = false; //TODO, Maybe should be in model
     private final BeerApiService remoteApiService;
     private final BeerStorage localStorage;
+    private boolean refreshed = false;
+
     public DataAccess(BeerApiService remoteService, BeerStorage localStorage, Observable<Boolean> networkStatus, BeerLogger logger) {
         this.remoteApiService = remoteService;
         this.localStorage = localStorage;
@@ -41,12 +42,10 @@ public class DataAccess {
                     }
                 })
                 .flatMap(new Function<Pair<Boolean, SelectType>, Observable<Pair<Boolean, SelectType>>>() {
-
                     @Override
-                    public Observable<Pair<Boolean, SelectType>> apply(final Pair<Boolean, SelectType> booleanIntegerPair) throws Exception {
-                        if (booleanIntegerPair.first && !refreshed) {
+                    public Observable<Pair<Boolean, SelectType>> apply(final Pair<Boolean, SelectType> onlineSelectTypePair) throws Exception {
+                        if (onlineSelectTypePair.first && !refreshed) {
                             return remoteApiService.getAllBeers()
-                                    .observeOn(Schedulers.io())
                                     .subscribeOn(Schedulers.io())
                                     .flatMap(new Function<List<Beer>, Observable<Pair<Boolean, SelectType>>>() {
                                         @Override
@@ -54,24 +53,22 @@ public class DataAccess {
                                             localStorage.insertAll(beers);
                                             refreshed = true;
                                             logger.d("Api success. Retrieved item size : " + beers.size());
-                                            return Observable.just(booleanIntegerPair); //TODO KL: Changed to doOnNext and just
+                                            return Observable.just(onlineSelectTypePair);
                                         }
                                     })
                                     .onErrorResumeNext(new Function<Throwable, ObservableSource<Pair<Boolean, SelectType>>>() {
                                         @Override
                                         public ObservableSource<Pair<Boolean, SelectType>> apply(Throwable throwable) throws Exception {
                                             logger.e("Api failure : " + throwable);
-                                            return Observable.just(booleanIntegerPair); //TODO KL: Changed to doOnNext and just
+                                            return Observable.just(onlineSelectTypePair);
                                         }
                                     });
                         } else {
-                            return Observable.just(booleanIntegerPair);
+                            return Observable.just(onlineSelectTypePair);
                         }
                     }
                 })
                 .observeOn(Schedulers.io())
-                .subscribeOn(Schedulers.io())
-                //TODO KL: If has already and SelectMode is the same don't reload
                 .flatMap(new Function<Pair<Boolean, SelectType>, Observable<List<Beer>>>() {
                     @Override
                     public Observable<List<Beer>> apply(Pair<Boolean, SelectType> booleanIntegerPair) throws Exception {
@@ -93,7 +90,7 @@ public class DataAccess {
     }
 
     public void update(Beer beer) {
-        localStorage.updateBeer(beer.favorite, beer.id); //TODO KL: Maybe make observable
+        localStorage.updateBeer(beer.favorite, beer.id);
     }
 
     public enum SelectType {
