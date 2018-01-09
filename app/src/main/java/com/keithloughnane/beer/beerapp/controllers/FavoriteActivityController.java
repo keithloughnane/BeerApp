@@ -10,7 +10,7 @@ import io.reactivex.disposables.Disposable;
  * Created by keith.loughnane@gmail.com on 06/01/2018.
  */
 
-public class FavoriteActivityController extends ControllerWithAdapter {
+public class FavoriteActivityController extends ListViewController {
 
     public FavoriteActivityController(BeerModel model) {
         super(model);

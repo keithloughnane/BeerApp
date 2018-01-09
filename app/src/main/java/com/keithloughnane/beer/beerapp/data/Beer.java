@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 @Entity
 @TypeConverters({BeerConverter.class})
-public class Beer implements Serializable { //TODO KL: Use JavaStyle names
+public class Beer implements Serializable {
     @PrimaryKey
     public int id;
 

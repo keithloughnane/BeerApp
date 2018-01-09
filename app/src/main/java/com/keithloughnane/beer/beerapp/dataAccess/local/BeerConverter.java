@@ -16,8 +16,9 @@ import java.util.ArrayList;
 
 public class BeerConverter {
     @TypeConverter
-    public static ArrayList<String> fromString(String value) { //TODO KL: Reuse
-        Type listType = new TypeToken<ArrayList<String>>() {}.getType();
+    public static ArrayList<String> fromString(String value) {
+        Type listType = new TypeToken<ArrayList<String>>() {
+        }.getType();
         return new Gson().fromJson(value, listType);
     }
 
@@ -29,7 +30,8 @@ public class BeerConverter {
 
     @TypeConverter
     public static ArrayList<Ingredient> fromIngredientString(String value) {
-        Type listType = new TypeToken<ArrayList<Ingredient>>() {}.getType();
+        Type listType = new TypeToken<ArrayList<Ingredient>>() {
+        }.getType();
         return new Gson().fromJson(value, listType);
     }
 
@@ -41,7 +43,8 @@ public class BeerConverter {
 
     @TypeConverter
     public static ArrayList<MethodStep> fromMethodStepString(String value) {
-        Type listType = new TypeToken<ArrayList<Ingredient>>() {}.getType();
+        Type listType = new TypeToken<ArrayList<Ingredient>>() {
+        }.getType();
         return new Gson().fromJson(value, listType);
     }
 

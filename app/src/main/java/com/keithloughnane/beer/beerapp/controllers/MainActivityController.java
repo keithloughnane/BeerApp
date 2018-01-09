@@ -12,7 +12,7 @@ import io.reactivex.subjects.PublishSubject;
  * Created by keith.loughnane@gmail.com on 04/01/2018.
  */
 
-public class MainActivityController extends ControllerWithAdapter {
+public class MainActivityController extends ListViewController {
     private static final DataAccess.SelectType DEFAULT_SELECT_TYPE = DataAccess.SelectType.ALL;
 
     public final PublishSubject<Object> favoriteClick = PublishSubject.create();

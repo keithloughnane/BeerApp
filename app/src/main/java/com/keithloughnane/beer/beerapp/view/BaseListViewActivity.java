@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.keithloughnane.beer.beerapp.R;
-import com.keithloughnane.beer.beerapp.controllers.ControllerWithAdapter;
+import com.keithloughnane.beer.beerapp.controllers.ListViewController;
 import com.keithloughnane.beer.beerapp.dataAccess.local.DataAccess;
 import com.keithloughnane.beer.beerapp.models.BeerModel;
 
@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
  * Created by keith.loughnane@gmail.com on 04/01/2018.
  */
 
-abstract class BaseActivityWithBeerAdapter<C extends ControllerWithAdapter> extends BaseActivity<BeerModel, C> implements BeerView {
+abstract class BaseListViewActivity<C extends ListViewController> extends BaseActivity<BeerModel, C> implements BeerView {
 
     @Inject
     DataAccess dataAccess;
@@ -36,24 +36,6 @@ abstract class BaseActivityWithBeerAdapter<C extends ControllerWithAdapter> exte
     View failure;
     private Adapter adapter;
 
-    class Adapter extends RecyclerView.Adapter<BeerViewHolder> {
-        @SuppressLint("InflateParams")
-        @Override
-        public BeerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new BeerViewHolder(LayoutInflater.from(getBaseContext()).inflate(R.layout.beer_view_holder, null), controller); //TODO KL: Refactor to avoid cast
-        }
-
-        @Override
-        public void onBindViewHolder(BeerViewHolder holder, int position) {
-            holder.bind(model.beers.get(position));
-        }
-
-        @Override
-        public int getItemCount() {
-            return model.beers.size();
-        }
-    }
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         ButterKnife.bind(this);
@@ -64,7 +46,7 @@ abstract class BaseActivityWithBeerAdapter<C extends ControllerWithAdapter> exte
     }
 
     @Override
-    protected BeerModel createModel() { //TODO KL: Move to Super. Generics should take care of
+    protected BeerModel createModel() {
         BeerModel model = new BeerModel();
         model.view = this;
         return model;
@@ -89,5 +71,23 @@ abstract class BaseActivityWithBeerAdapter<C extends ControllerWithAdapter> exte
         recyclerView.setVisibility(View.GONE);
         failure.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
+    }
+
+    class Adapter extends RecyclerView.Adapter<BeerViewHolder> {
+        @SuppressLint("InflateParams")
+        @Override
+        public BeerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            return new BeerViewHolder(LayoutInflater.from(getBaseContext()).inflate(R.layout.beer_view_holder, null));
+        }
+
+        @Override
+        public void onBindViewHolder(BeerViewHolder holder, int position) {
+            holder.bind(model.beers.get(position), controller);
+        }
+
+        @Override
+        public int getItemCount() {
+            return model.beers.size();
+        }
     }
 }

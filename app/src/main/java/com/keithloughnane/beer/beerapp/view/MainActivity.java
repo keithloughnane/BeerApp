@@ -14,7 +14,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.functions.Consumer;
 
-public class MainActivity extends BaseActivityWithBeerAdapter<MainActivityController> {
+public class MainActivity extends BaseListViewActivity<MainActivityController> {
 
     @BindView(R.id.abv)
     Button abv;
@@ -37,17 +37,12 @@ public class MainActivity extends BaseActivityWithBeerAdapter<MainActivityContro
         RxView.clicks(favorite)
                 .doOnNext(new Consumer<Object>() {
                     @Override
-                    public void accept(Object o) throws Exception {
+                    public void accept(Object notUsed) throws Exception {
                         Intent intent = new Intent(getApplicationContext(), FavoriteActivity.class);
                         startActivity(intent);
                     }
                 })
-                .subscribe(new Consumer<Object>() {
-                    @Override
-                    public void accept(Object o) throws Exception {
-                        controller.favoriteClick.onNext(o); //TODO KL: Need whole object?
-                    }
-                });
+                .subscribe(controller.favoriteClick);
     }
 
     @OnClick(R.id.abv)

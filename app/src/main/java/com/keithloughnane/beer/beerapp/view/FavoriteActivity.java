@@ -5,7 +5,7 @@ import android.os.Bundle;
 import com.keithloughnane.beer.beerapp.R;
 import com.keithloughnane.beer.beerapp.controllers.FavoriteActivityController;
 
-public class FavoriteActivity extends BaseActivityWithBeerAdapter<FavoriteActivityController> {
+public class FavoriteActivity extends BaseListViewActivity<FavoriteActivityController> {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -19,19 +19,19 @@ import io.reactivex.subjects.PublishSubject;
  * Created by keith.loughnane@gmail.com on 06/01/2018.
  */
 
-public abstract class ControllerWithAdapter extends Controller {
+public abstract class ListViewController extends Controller {
     public final PublishSubject<Beer> holderClick = PublishSubject.create();
     public final PublishSubject<Beer> favoriteClick = PublishSubject.create();
     public final BehaviorSubject<DataAccess.SelectType> selectMode = BehaviorSubject.create();
 
     @Inject
     public
-    DataAccess dataAccess; //TODO KL: Move to super
+    DataAccess dataAccess;
 
     @Inject
     NetworkObserver networkObserver;
 
-    ControllerWithAdapter(BeerModel beerModel) {
+    ListViewController(BeerModel beerModel) {
         super(beerModel);
 
         holderClick //TODO KL: What is this for?
@@ -48,7 +48,7 @@ public abstract class ControllerWithAdapter extends Controller {
                  dataAccess.update(beer);
             }
         });
-    } //TODO KL: Rename
+    }
 
     @Override
     protected Disposable setUpSubscriptions() {
