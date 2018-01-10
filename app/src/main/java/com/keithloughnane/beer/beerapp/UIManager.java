@@ -1,5 +1,6 @@
 package com.keithloughnane.beer.beerapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
@@ -12,20 +13,24 @@ import com.keithloughnane.beer.beerapp.view.FavoriteActivity;
  */
 
 public class UIManager {
-    private final Context context;
+    private Context activityContext;
 
-    public UIManager(Context context) {
-        this.context = context;
+    public void setActivity(Activity activity) {
+        this.activityContext = activity;
     }
 
     public void showFavorites() {
-        Intent intent = new Intent(context, FavoriteActivity.class);
-        context.startActivity(intent);
+        if (activityContext != null) {
+            Intent intent = new Intent(activityContext, FavoriteActivity.class);
+            activityContext.startActivity(intent);
+        }
     }
 
     public void showBeerProfile(Beer beer) {
-        Intent intent = new Intent(context, BeerProfileActivity.class);
-        intent.putExtra(BeerProfileActivity.BEER_PARAM, beer);
-        context.startActivity(intent);
+        if (activityContext != null) {
+            Intent intent = new Intent(activityContext, BeerProfileActivity.class);
+            intent.putExtra(BeerProfileActivity.BEER_PARAM, beer);
+            activityContext.startActivity(intent);
+        }
     }
 }

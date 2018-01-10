@@ -75,7 +75,7 @@ public class AppModule {
 
     @Provides
     @Singleton
-    UIManager providesUIManager(Context context) {
-        return new UIManager(context);
+    UIManager providesUIManager() {
+        return new UIManager();
     }
 }

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.keithloughnane.beer.beerapp.BeerApplication;
 import com.keithloughnane.beer.beerapp.R;
 import com.keithloughnane.beer.beerapp.data.Beer;
 import com.keithloughnane.beer.beerapp.data.Ingredient;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class BeerProfileActivity extends AppCompatActivity {
+public class BeerProfileActivity extends BaseActivity {
     public static final String BEER_PARAM = "BEER_PARAM";
 
     @BindView(R.id.beer_image)
@@ -43,8 +44,9 @@ public class BeerProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beer_profile);
+        ((BeerApplication) getApplication()).component.inject(this);
+        super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
 
         Beer beer = (Beer) getIntent().getSerializableExtra(BEER_PARAM);

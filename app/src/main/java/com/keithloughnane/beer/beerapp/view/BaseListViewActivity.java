@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
  * Created by keith.loughnane@gmail.com on 04/01/2018.
  */
 
-abstract class BaseListViewActivity<C extends ListViewController> extends BaseActivity<BeerModel, C> implements BeerView {
+abstract class BaseListViewActivity<C extends ListViewController> extends BaseActivityWithModelAndController<BeerModel, C> implements BeerView {
 
     @Inject
     DataAccess dataAccess;
